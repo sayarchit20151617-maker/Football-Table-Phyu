@@ -18,13 +18,13 @@
   .tab-btn{flex:1;padding:12px;text-align:center;font-weight:600;font-size:13px;color:#94a3b8;background:none;border:none;border-bottom:2px solid transparent;cursor:pointer}
   .tab-btn.active{color:#22c55e;border-bottom-color:#22c55e}
   
-  .container{max-width:600px;margin:0 auto;padding:12px 10px}
+  .container{max-width:600px;margin:0 auto;padding:12px 6px}
   .tab-content{display:none}
   .tab-content.active{display:block}
   
   /* Section Header & Cards */
   .section-title{font-size:14px;font-weight:700;color:#22c55e;margin:14px 4px 8px;display:flex;justify-content:space-between;align-items:center}
-  .card{background:#16191e;border-radius:12px;padding:8px;margin-bottom:16px;border:1px solid #262b33}
+  .card{background:#16191e;border-radius:12px;padding:6px 2px;margin-bottom:16px;border:1px solid #262b33}
   
   /* MLS Style Matches / Fixtures */
   .match-row{display:flex;align-items:center;justify-content:space-between;padding:12px 4px;border-bottom:1px solid #22272e}
@@ -32,19 +32,20 @@
   .match-meta{font-size:10px;color:#94a3b8;width:80px;line-height:1.4;flex-shrink:0}
   .match-teams-wrap{flex:1;display:flex;align-items:center;justify-content:space-between;padding:0 2px}
   
-  /* အသင်းနာမည် Size ကို ပိုကြီးပေးထားသည် (14px, Bold) */
   .t-name{font-size:14px;font-weight:700;color:#ffffff;width:37%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .t-home{text-align:right}
   .t-away{text-align:left}
   .score-badge{background:#22272e;color:#22c55e;font-weight:700;font-size:12px;padding:5px 8px;border-radius:6px;min-width:46px;text-align:center;border:1px solid #2e3541;flex-shrink:0}
   
-  /* MLS Style Standings Table */
+  /* MLS Style Standings Table (Compact for Mobile) */
   .table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
-  table{width:100%;border-collapse:collapse;font-size:12px;min-width:400px}
-  th{color:#64748b;font-weight:600;padding:8px 4px;font-size:11px;text-align:center;border-bottom:1px solid #262b33}
-  td{padding:10px 4px;text-align:center;border-bottom:1px solid #1c2128;color:#cbd5e1}
-  td.team-cell{text-align:left;font-weight:700;font-size:13px;color:#ffffff;display:flex;align-items:center;gap:4px;white-space:nowrap}
-  .pos{width:20px;color:#94a3b8;font-size:11px}
+  table{width:100%;border-collapse:collapse;font-size:12px;table-layout:auto}
+  th{color:#64748b;font-weight:600;padding:8px 2px;font-size:11px;text-align:center;border-bottom:1px solid #262b33}
+  td{padding:10px 2px;text-align:center;border-bottom:1px solid #1c2128;color:#cbd5e1}
+  
+  /* အသင်းနာမည် ကော်လံ နေရာ အသေအချာ ညှိထားသည် */
+  td.team-cell{text-align:left;font-weight:700;font-size:13px;color:#ffffff;display:flex;align-items:center;gap:3px;white-space:nowrap;padding-right:4px}
+  .pos{width:16px;color:#94a3b8;font-size:11px;padding-left:2px}
   
   /* Qualified Highlight */
   tr:nth-child(1) .pos-bar, tr:nth-child(2) .pos-bar{content:'';width:3px;height:14px;background:#22c55e;display:inline-block;border-radius:2px;margin-right:2px}
@@ -164,7 +165,7 @@ function renderTables(){
           <table>
             <thead>
               <tr>
-                <th style="width:20px">#</th>
+                <th style="width:16px">#</th>
                 <th style="text-align:left">Team</th>
                 <th>Pl</th><th>W</th><th>D</th><th>L</th><th>GF</th><th>GA</th><th>GD</th><th>Pts</th>
               </tr>
