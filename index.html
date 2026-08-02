@@ -5,79 +5,214 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Football Championship 2026</title>
 <style>
-  *{box-sizing:border-box;margin:0;padding:0;font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, "Noto Sans Myanmar", sans-serif;}
-  body{background:#080808;color:#ffffff;font-size:13px;padding-bottom:40px}
+  :root {
+    --bg-color: #0b0e14;
+    --card-bg: #161b22;
+    --card-inner: #1c2128;
+    --text-color: #f0f6fc;
+    --text-sub: #8b949e;
+    --border-color: #30363d;
+    --line-color: #388bfd;
+    --accent-green: #2ea043;
+  }
+
+  body.light-mode {
+    --bg-color: #f6f8fa;
+    --card-bg: #ffffff;
+    --card-inner: #f3f4f6;
+    --text-color: #1f2328;
+    --text-sub: #656d76;
+    --border-color: #d0d7de;
+    --line-color: #0969da;
+    --accent-green: #1a7f37;
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0;font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, "Noto Sans Myanmar", sans-serif; transition: background-color 0.2s, color 0.2s;}
+  body{background:var(--bg-color);color:var(--text-color);font-size:13px;padding-bottom:40px}
   
-  /* Header UI */
-  header{background:#080808;padding:16px 14px;border-bottom:1px solid #1c1c1e;text-align:center}
-  header h1{font-size:15px;line-height:1.4;font-weight:600;color:#f1f5f9}
-  header p{font-size:11px;color:#94a3b8;margin-top:4px}
+  header{background:var(--bg-color);padding:16px 14px;border-bottom:1px solid var(--border-color);text-align:center;position:relative}
+  header h1{font-size:15px;line-height:1.4;font-weight:600;color:var(--text-color)}
+  header p{font-size:11px;color:var(--text-sub);margin-top:4px}
+
+  .theme-btn {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: var(--card-inner);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+  }
   
-  /* Navigation Tabs */
-  .nav-tabs{display:flex;background:#080808;border-bottom:1px solid #1c1c1e;position:sticky;top:0;z-index:100;overflow-x:auto}
-  .tab-btn{padding:12px 16px;text-align:center;font-weight:600;font-size:13px;color:#8e8e93;background:none;border:none;border-bottom:2px solid transparent;cursor:pointer;white-space:nowrap}
-  .tab-btn.active{color:#ffffff;border-bottom-color:#22c55e}
+  .nav-tabs{display:flex;background:var(--bg-color);border-bottom:1px solid var(--border-color);position:sticky;top:0;z-index:100;overflow-x:auto}
+  .tab-btn{padding:12px 16px;text-align:center;font-weight:600;font-size:13px;color:var(--text-sub);background:none;border:none;border-bottom:2px solid transparent;cursor:pointer;white-space:nowrap}
+  .tab-btn.active{color:var(--text-color);border-bottom-color:var(--accent-green)}
   
   .container{max-width:600px;margin:0 auto;padding:12px 8px}
   .tab-content{display:none}
   .tab-content.active{display:block}
   
-  /* Section Title & Card */
-  .section-title{font-size:14px;font-weight:700;color:#22c55e;margin:14px 4px 8px}
-  .card{background:#121212;border-radius:12px;padding:6px 2px;margin-bottom:16px;border:1px solid #1c1c1e}
+  .section-title{font-size:14px;font-weight:700;color:var(--accent-green);margin:14px 4px 8px}
+  .card{background:var(--card-bg);border-radius:12px;padding:6px 2px;margin-bottom:16px;border:1px solid var(--border-color)}
   
   /* Fixtures Match Row */
-  .match-row{display:flex;align-items:center;justify-content:space-between;padding:12px 4px;border-bottom:1px solid #1c1c1e}
+  .match-row{display:flex;align-items:center;justify-content:space-between;padding:12px 4px;border-bottom:1px solid var(--border-color)}
   .match-row:last-child{border-bottom:none}
-  .match-meta{font-size:10px;color:#8e8e93;width:80px;line-height:1.4;flex-shrink:0}
+  .match-meta{font-size:10px;color:var(--text-sub);width:80px;line-height:1.4;flex-shrink:0}
   .match-teams-wrap{flex:1;display:flex;align-items:center;justify-content:space-between;padding:0 2px}
-  .t-name{font-size:13px;font-weight:700;color:#ffffff;width:37%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .t-name{font-size:13px;font-weight:700;color:var(--text-color);width:37%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .t-home{text-align:right}
   .t-away{text-align:left}
-  .score-badge{background:#1c1c1e;color:#22c55e;font-weight:700;font-size:12px;padding:5px 8px;border-radius:6px;min-width:44px;text-align:center;border:1px solid #2c2c2e;flex-shrink:0}
+  .score-badge{background:var(--card-inner);color:var(--accent-green);font-weight:700;font-size:12px;padding:5px 8px;border-radius:6px;min-width:44px;text-align:center;border:1px solid var(--border-color);flex-shrink:0}
   
   /* Standings Table */
   .table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
   table{width:100%;border-collapse:collapse;font-size:12px}
-  th{color:#8e8e93;font-weight:600;padding:8px 4px;font-size:11px;text-align:center;border-bottom:1px solid #1c1c1e;white-space:nowrap}
-  td{padding:10px 4px;text-align:center;border-bottom:1px solid #1c1c1e;color:#cbd5e1;white-space:nowrap}
+  th{color:var(--text-sub);font-weight:600;padding:8px 4px;font-size:11px;text-align:center;border-bottom:1px solid var(--border-color);white-space:nowrap}
+  td{padding:10px 4px;text-align:center;border-bottom:1px solid var(--border-color);color:var(--text-color);white-space:nowrap}
   th.team-th{text-align:left;width:100%}
-  td.team-cell{text-align:left;font-weight:700;font-size:13px;color:#ffffff;display:flex;align-items:center;gap:3px;white-space:nowrap}
-  .pos{width:18px;color:#8e8e93;font-size:11px;padding-left:2px}
-  tr:nth-child(1) .pos-bar, tr:nth-child(2) .pos-bar{content:'';width:3px;height:14px;background:#22c55e;display:inline-block;border-radius:2px;margin-right:2px}
-  .pts{font-weight:700;color:#22c55e}
+  td.team-cell{text-align:left;font-weight:700;font-size:13px;color:var(--text-color);display:flex;align-items:center;gap:3px;white-space:nowrap}
+  .pos{width:18px;color:var(--text-sub);font-size:11px;padding-left:2px}
+  tr:nth-child(1) .pos-bar, tr:nth-child(2) .pos-bar{content:'';width:3px;height:14px;background:var(--accent-green);display:inline-block;border-radius:2px;margin-right:2px}
+  .pts{font-weight:700;color:var(--accent-green)}
   
-  /* Vertical Bracket (FotMob Style) */
-  .v-bracket{display:flex;flex-direction:column;align-items:center;gap:16px;padding:10px 0}
-  
-  /* Match Card Box */
-  .v-card{background:#18181b;border-radius:14px;padding:10px 14px;width:170px;border:1px solid #27272a;position:relative;box-shadow:0 4px 12px rgba(0,0,0,0.5)}
-  .v-card-teams{display:flex;justify-content:space-between;gap:8px;align-items:center}
-  .v-team{display:flex;flex-direction:column;align-items:center;width:45%;text-align:center}
-  .v-team .t-code{font-size:12px;font-weight:700;color:#ffffff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
-  .v-team .t-score{font-size:14px;font-weight:800;color:#22c55e;margin-top:2px}
-  .v-date{font-size:9px;color:#71717a;text-align:center;margin-top:6px;border-top:1px solid #27272a;padding-top:4px}
-  
-  /* Connectors (Vertical Lines) */
-  .line-v{width:2px;height:16px;background:#3f3f46}
-  
-  /* Split Bracket Top & Bottom */
-  .v-row-two{display:flex;justify-content:space-between;width:100%;max-width:340px}
-  .v-branch{display:flex;flex-direction:column;align-items:center}
-  
-  .v-fork{width:160px;height:12px;border-top:2px solid #3f3f46;border-left:2px solid #3f3f46;border-right:2px solid #3f3f46}
-  .v-fork-bottom{width:160px;height:12px;border-bottom:2px solid #3f3f46;border-left:2px solid #3f3f46;border-right:2px solid #3f3f46}
+  /* FotMob Style Bracket Structure */
+  .bracket-tree {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 0;
+    gap: 0;
+  }
 
-  /* Badges */
-  .badge-label{font-size:9px;font-weight:800;padding:2px 6px;border-radius:4px;text-transform:uppercase;margin-bottom:4px;display:inline-block}
-  .badge-sf{background:#27272a;color:#a1a1aa}
-  .badge-third{background:#3b82f6;color:#ffffff}
-  .badge-final{background:#eab308;color:#000000}
+  .sf-row {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 380px;
+    position: relative;
+  }
+
+  .bracket-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    width: 140px;
+    padding: 10px 12px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.2);
+    position: relative;
+    z-index: 2;
+  }
+
+  .card-header {
+    font-size: 9px;
+    font-weight: 800;
+    color: var(--text-sub);
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 8px;
+    letter-spacing: 0.5px;
+  }
+
+  .team-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 6px;
+  }
+  .team-row:last-child { margin-bottom: 0; }
+
+  .team-info {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    overflow: hidden;
+  }
+
+  .team-icon {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 8px;
+    font-weight: bold;
+    flex-shrink: 0;
+  }
+
+  .team-name {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--text-color);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .team-score {
+    font-size: 12px;
+    font-weight: 800;
+    color: var(--text-sub);
+  }
+  .team-score.win { color: var(--accent-green); }
+
+  /* Tree Connector Lines (FotMob Blue Style) */
+  .tree-connectors {
+    width: 100%;
+    max-width: 380px;
+    height: 30px;
+    position: relative;
+  }
+
+  .line-top-h {
+    position: absolute;
+    top: 0;
+    left: 70px;
+    right: 70px;
+    height: 15px;
+    border-bottom: 2px solid var(--line-color);
+    border-left: 2px solid var(--line-color);
+    border-right: 2px solid var(--line-color);
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+  }
+
+  .line-center-v {
+    position: absolute;
+    top: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: 15px;
+    background: var(--line-color);
+  }
+
+  .line-straight-v {
+    width: 2px;
+    height: 24px;
+    background: var(--line-color);
+  }
+
+  /* Trophy & Champions */
+  .trophy-box {
+    margin-top: 12px;
+    text-align: center;
+  }
+  .trophy-icon { font-size: 28px; }
+  .champion-title { font-size: 12px; font-weight: 800; color: #eab308; margin-top: 2px; }
+
 </style>
 </head>
 <body>
 
 <header>
+  <button class="theme-btn" id="themeToggle" onclick="toggleTheme()">🌙 Dark</button>
   <h1>၂၀၂၆ ခုနှစ်၊ ဖြူးမြို့နယ်စီမံခန့်ခွဲရေးနှင့် အုပ်ချုပ်ရေးကော်မတီ<br>ဥက္ကဌ ဖလား ရပ်ကွက် နှင့် ကျေးရွာအုပ်စု အလွတ်တန်း ဘောလုံးပြိုင်ပွဲ</h1>
   <p>Official Tournament Center</p>
 </header>
@@ -89,74 +224,111 @@
 </div>
 
 <div class="container">
-  <!-- Table Tab -->
   <div id="table-tab" class="tab-content active">
     <div id="tablesContainer"></div>
   </div>
 
-  <!-- Knockout Tab (FotMob Vertical Tree View) -->
+  <!-- Knockout Tab: Refined FotMob Style Bracket -->
   <div id="knockout-tab" class="tab-content">
-    <div class="v-bracket">
+    <div class="bracket-tree">
       
-      <!-- Top Semi Finals -->
-      <div class="v-row-two">
-        <div class="v-branch">
-          <span class="badge-label badge-sf">Semi-Final 1</span>
-          <div class="v-card">
-            <div class="v-card-teams">
-              <div class="v-team"><span class="t-code">Group A 1st</span><span class="t-score">-</span></div>
-              <div class="v-team"><span class="t-code">Group B 2nd</span><span class="t-score">-</span></div>
+      <!-- Semi Finals Row -->
+      <div class="sf-row">
+        <!-- SF 1 -->
+        <div class="bracket-card">
+          <div class="card-header">Semi-Final 1</div>
+          <div class="team-row">
+            <div class="team-info">
+              <span class="team-icon">A1</span>
+              <span class="team-name">Group A 1st</span>
             </div>
-            <div class="v-date">17.8.2026 • 3:00 PM</div>
+            <span class="team-score">-</span>
+          </div>
+          <div class="team-row">
+            <div class="team-info">
+              <span class="team-icon">B2</span>
+              <span class="team-name">Group B 2nd</span>
+            </div>
+            <span class="team-score">-</span>
           </div>
         </div>
 
-        <div class="v-branch">
-          <span class="badge-label badge-sf">Semi-Final 2</span>
-          <div class="v-card">
-            <div class="v-card-teams">
-              <div class="v-team"><span class="t-code">Group B 1st</span><span class="t-score">-</span></div>
-              <div class="v-team"><span class="t-code">Group A 2nd</span><span class="t-score">-</span></div>
+        <!-- SF 2 -->
+        <div class="bracket-card">
+          <div class="card-header">Semi-Final 2</div>
+          <div class="team-row">
+            <div class="team-info">
+              <span class="team-icon">B1</span>
+              <span class="team-name">Group B 1st</span>
             </div>
-            <div class="v-date">18.8.2026 • 3:00 PM</div>
+            <span class="team-score">-</span>
+          </div>
+          <div class="team-row">
+            <div class="team-info">
+              <span class="team-icon">A2</span>
+              <span class="team-name">Group A 2nd</span>
+            </div>
+            <span class="team-score">-</span>
           </div>
         </div>
       </div>
 
-      <!-- Fork Lines connecting to Center -->
-      <div class="v-fork-bottom"></div>
-      <div class="line-v"></div>
+      <!-- Connector Lines -->
+      <div class="tree-connectors">
+        <div class="line-top-h"></div>
+        <div class="line-center-v"></div>
+      </div>
 
       <!-- Final Match -->
-      <div class="v-branch">
-        <span class="badge-label badge-final">FINAL</span>
-        <div class="v-card" style="border-color:#eab308">
-          <div class="v-card-teams">
-            <div class="v-team"><span class="t-code">SF1 Winner</span><span class="t-score">-</span></div>
-            <div class="v-team"><span class="t-code">SF2 Winner</span><span class="t-score">-</span></div>
+      <div class="bracket-card" style="border-color: #eab308; width: 160px;">
+        <div class="card-header" style="color: #eab308;">FINAL • 24.8.2026</div>
+        <div class="team-row">
+          <div class="team-info">
+            <span class="team-icon" style="background:#eab308; color:#000">W1</span>
+            <span class="team-name">SF1 Winner</span>
           </div>
-          <div class="v-date" style="color:#eab308">24.8.2026 • 3:00 PM</div>
+          <span class="team-score">-</span>
+        </div>
+        <div class="team-row">
+          <div class="team-info">
+            <span class="team-icon" style="background:#eab308; color:#000">W2</span>
+            <span class="team-name">SF2 Winner</span>
+          </div>
+          <span class="team-score">-</span>
         </div>
       </div>
 
-      <div class="line-v"></div>
+      <!-- Connector to 3rd Place -->
+      <div class="line-straight-v"></div>
 
       <!-- 3rd Place Match -->
-      <div class="v-branch">
-        <span class="badge-label badge-third">3RD PLACE</span>
-        <div class="v-card" style="border-color:#3b82f6">
-          <div class="v-card-teams">
-            <div class="v-team"><span class="t-code">SF1 Loser</span><span class="t-score">-</span></div>
-            <div class="v-team"><span class="t-code">SF2 Loser</span><span class="t-score">-</span></div>
+      <div class="bracket-card" style="border-color: #388bfd; width: 160px;">
+        <div class="card-header" style="color: #388bfd;">3RD PLACE • 23.8.2026</div>
+        <div class="team-row">
+          <div class="team-info">
+            <span class="team-icon" style="background:#388bfd; color:#fff">L1</span>
+            <span class="team-name">SF1 Loser</span>
           </div>
-          <div class="v-date" style="color:#60a5fa">23.8.2026 • 3:00 PM</div>
+          <span class="team-score">-</span>
         </div>
+        <div class="team-row">
+          <div class="team-info">
+            <span class="team-icon" style="background:#388bfd; color:#fff">L2</span>
+            <span class="team-name">SF2 Loser</span>
+          </div>
+          <span class="team-score">-</span>
+        </div>
+      </div>
+
+      <!-- Trophy Section -->
+      <div class="trophy-box">
+        <div class="trophy-icon">🏆</div>
+        <div class="champion-title">CHAMPION 2026</div>
       </div>
 
     </div>
   </div>
 
-  <!-- Fixtures Tab -->
   <div id="fixtures-tab" class="tab-content">
     <div class="section-title">Matches & Results</div>
     <div class="card" id="matchesContainer"></div>
@@ -176,7 +348,7 @@ const matches = [
   { g: "B", home: 2, away: 3, score: "1 - 2", date: "30.7.2026", time: "3:00 PM" },
   { g: "A", home: 0, away: 4, score: "3 - 1", date: "31.7.2026", time: "3:00 PM" },
   { g: "B", home: 0, away: 4, score: "1 - 4", date: "1.8.2026", time: "3:00 PM" },
-  { g: "A", home: 1, away: 2, score: "0 - 1", date: "2.8.2026", time: "3:00 PM" },
+  { g: "A", home: 1, away: 2, score: "", date: "2.8.2026", time: "3:00 PM" },
   { g: "B", home: 1, away: 2, score: "", date: "3.8.2026", time: "3:00 PM" },
   { g: "A", home: 0, away: 3, score: "", date: "4.8.2026", time: "3:00 PM" },
   { g: "B", home: 0, away: 3, score: "", date: "5.8.2026", time: "3:00 PM" },
@@ -191,6 +363,16 @@ const matches = [
   { g: "A", home: 0, away: 1, score: "", date: "14.8.2026", time: "3:00 PM" },
   { g: "B", home: 0, away: 1, score: "", date: "15.8.2026", time: "3:00 PM" }
 ];
+
+function toggleTheme() {
+  document.body.classList.toggle('light-mode');
+  const btn = document.getElementById('themeToggle');
+  if(document.body.classList.contains('light-mode')) {
+    btn.innerHTML = '☀️ Light';
+  } else {
+    btn.innerHTML = '🌙 Dark';
+  }
+}
 
 function switchTab(tab) {
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
@@ -215,7 +397,7 @@ function renderFixtures(){
     const aName = teams[m.g][m.away];
     return `
       <div class="match-row">
-        <div class="match-meta"><b>Group ${m.g}</b><br>${m.date}<br><span style="color:#22c55e">${m.time}</span></div>
+        <div class="match-meta"><b>Group ${m.g}</b><br>${m.date}<br><span style="color:var(--accent-green)">${m.time}</span></div>
         <div class="match-teams-wrap">
           <span class="t-name t-home">${escapeHtml(hName)}</span>
           <span class="score-badge">${m.score || 'VS'}</span>
