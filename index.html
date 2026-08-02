@@ -4,60 +4,144 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Football Championship 2026</title>
+
+<!-- Standard Google Web Fonts for Perfect Myanmar Rendering -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Myanmar:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
 <style>
   :root {
-    --bg-color: #0b0e14;
-    --card-bg: #161b22;
-    --card-inner: #1c2128;
+    /* Deeper Navy Blue for Dark Mode */
+    --bg-color: #0a1526;
+    --card-bg: #142238;
+    --card-inner: #1e304d;
     --text-color: #f0f6fc;
-    --text-sub: #8b949e;
-    --border-color: #30363d;
-    --line-color: #388bfd;
+    --text-sub: #8da9c4;
+    --border-color: #283d59;
+    --line-color: #3b577d;
     --accent-green: #2ea043;
+    --accent-gold: #eab308;
+    --accent-blue: #388bfd;
   }
 
   body.light-mode {
-    --bg-color: #f6f8fa;
+    /* Richer Medium-Light Blue Tone for Light Mode */
+    --bg-color: #bcd8f5;
     --card-bg: #ffffff;
-    --card-inner: #f3f4f6;
-    --text-color: #1f2328;
-    --text-sub: #656d76;
-    --border-color: #d0d7de;
-    --line-color: #0969da;
+    --card-inner: #a8cef2;
+    --text-color: #0a182a;
+    --text-sub: #335275;
+    --border-color: #92bce6;
+    --line-color: #6d9ed4;
     --accent-green: #1a7f37;
+    --accent-gold: #ca8a04;
+    --accent-blue: #0969da;
   }
 
-  *{box-sizing:border-box;margin:0;padding:0;font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, "Noto Sans Myanmar", sans-serif; transition: background-color 0.2s, color 0.2s;}
-  body{background:var(--bg-color);color:var(--text-color);font-size:13px;padding-bottom:40px}
-  
-  header{background:var(--bg-color);padding:16px 14px;border-bottom:1px solid var(--border-color);text-align:center;position:relative}
-  header h1{font-size:15px;line-height:1.4;font-weight:600;color:var(--text-color)}
-  header p{font-size:11px;color:var(--text-sub);margin-top:4px}
+  /* Universal Perfect Font & Accurate Rendering Rules */
+  *{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Noto Sans Myanmar', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    font-variant-ligatures: normal;
+    transition: background-color 0.2s, color 0.2s;
+  }
 
-  .theme-btn {
-    position: absolute;
-    top: 12px;
-    right: 12px;
+  body{
+    background: var(--bg-color);
+    color: var(--text-color);
+    font-size: 13px;
+    padding-bottom: 40px;
+    line-height: 1.5;
+  }
+  
+  /* Modern Header with Beautiful & Accurate Myanmar Title */
+  header{
+    background: linear-gradient(180deg, var(--card-bg) 0%, var(--bg-color) 100%);
+    padding: 20px 16px 14px;
+    text-align: center;
+    border-bottom: 1px solid var(--border-color);
+  }
+  .header-badge {
+    display: inline-block;
+    background: rgba(46, 160, 67, 0.15);
+    color: var(--accent-green);
+    font-size: 10px;
+    font-weight: 800;
+    padding: 3px 10px;
+    border-radius: 12px;
+    margin-bottom: 8px;
+    letter-spacing: 0.5px;
+  }
+  
+  /* Clear & Accurate Title Font */
+  header h1{
+    font-size: 15px;
+    line-height: 1.6;
+    font-weight: 700;
+    color: var(--text-color);
+    letter-spacing: 0.1px;
+  }
+
+  /* Navigation Bar + Integrated Dark Switch */
+  .nav-tabs-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--bg-color);
+    border-bottom: 1px solid var(--border-color);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    padding-right: 12px;
+  }
+  .nav-tabs{
+    display: flex;
+    overflow-x: auto;
+  }
+  .tab-btn{
+    padding: 12px 16px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 13px;
+    color: var(--text-sub);
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  .tab-btn.active{
+    color: var(--text-color);
+    border-bottom-color: var(--accent-green);
+  }
+
+  /* Inline Switch Button */
+  .theme-toggle-btn {
     background: var(--card-inner);
     color: var(--text-color);
     border: 1px solid var(--border-color);
     padding: 5px 10px;
-    border-radius: 20px;
+    border-radius: 16px;
     font-size: 11px;
     font-weight: 600;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    flex-shrink: 0;
   }
-  
-  .nav-tabs{display:flex;background:var(--bg-color);border-bottom:1px solid var(--border-color);position:sticky;top:0;z-index:100;overflow-x:auto}
-  .tab-btn{padding:12px 16px;text-align:center;font-weight:600;font-size:13px;color:var(--text-sub);background:none;border:none;border-bottom:2px solid transparent;cursor:pointer;white-space:nowrap}
-  .tab-btn.active{color:var(--text-color);border-bottom-color:var(--accent-green)}
   
   .container{max-width:600px;margin:0 auto;padding:12px 8px}
   .tab-content{display:none}
   .tab-content.active{display:block}
   
-  .section-title{font-size:14px;font-weight:700;color:var(--accent-green);margin:14px 4px 8px}
-  .card{background:var(--card-bg);border-radius:12px;padding:6px 2px;margin-bottom:16px;border:1px solid var(--border-color)}
+  .section-title{font-size:13px;font-weight:700;color:var(--text-sub);margin:14px 4px 8px; text-transform: uppercase; letter-spacing: 0.5px;}
+  .card{background:var(--card-bg);border-radius:12px;padding:6px 2px;margin-bottom:16px;border:1px solid var(--border-color); box-shadow: 0 4px 12px rgba(0,0,0,0.08);}
   
   /* Fixtures Match Row */
   .match-row{display:flex;align-items:center;justify-content:space-between;padding:12px 4px;border-bottom:1px solid var(--border-color)}
@@ -80,255 +164,271 @@
   tr:nth-child(1) .pos-bar, tr:nth-child(2) .pos-bar{content:'';width:3px;height:14px;background:var(--accent-green);display:inline-block;border-radius:2px;margin-right:2px}
   .pts{font-weight:700;color:var(--accent-green)}
   
-  /* FotMob Style Bracket Structure */
+  /* FotMob Horizontal Bracket Layout */
+  .horizontal-bracket-wrapper {
+    overflow-x: auto;
+    padding: 10px 0 20px;
+    -webkit-overflow-scrolling: touch;
+  }
+
   .bracket-tree {
     display: flex;
-    flex-direction: column;
     align-items: center;
-    padding: 20px 0;
-    gap: 0;
-  }
-
-  .sf-row {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    max-width: 380px;
+    min-width: 340px;
     position: relative;
+    padding-right: 10px;
   }
 
-  .bracket-card {
+  /* Left Column: Semi Finals */
+  .sf-column {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 170px;
+    flex-shrink: 0;
+  }
+
+  /* Right Column: Final */
+  .final-column {
+    width: 150px;
+    flex-shrink: 0;
+    margin-left: 20px;
+  }
+
+  /* Match Card */
+  .b-card {
     background: var(--card-bg);
     border: 1px solid var(--border-color);
-    border-radius: 16px;
-    width: 140px;
-    padding: 10px 12px;
-    box-shadow: 0 4px 14px rgba(0,0,0,0.2);
-    position: relative;
-    z-index: 2;
-  }
-
-  .card-header {
-    font-size: 9px;
-    font-weight: 800;
-    color: var(--text-sub);
-    text-transform: uppercase;
-    text-align: center;
-    margin-bottom: 8px;
-    letter-spacing: 0.5px;
-  }
-
-  .team-row {
+    border-radius: 12px;
+    padding: 10px;
     display: flex;
-    align-items: center;
     justify-content: space-between;
-    margin-bottom: 6px;
+    align-items: center;
+    position: relative;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
   }
-  .team-row:last-child { margin-bottom: 0; }
 
-  .team-info {
+  .b-teams {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1;
+  }
+
+  .b-team-row {
     display: flex;
     align-items: center;
     gap: 6px;
-    overflow: hidden;
   }
 
-  .team-icon {
-    width: 18px;
-    height: 18px;
+  .b-icon {
+    width: 16px;
+    height: 16px;
     border-radius: 50%;
-    background: var(--border-color);
+    background: var(--card-inner);
+    border: 1px solid var(--border-color);
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 8px;
     font-weight: bold;
-    flex-shrink: 0;
+    color: var(--text-sub);
   }
 
-  .team-name {
+  .b-name {
     font-size: 11px;
     font-weight: 700;
     color: var(--text-color);
     white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
   }
 
-  .team-score {
-    font-size: 12px;
-    font-weight: 800;
+  .b-time-box {
+    text-align: right;
+    border-left: 1px solid var(--border-color);
+    padding-left: 8px;
+    margin-left: 6px;
+    font-size: 9px;
     color: var(--text-sub);
+    line-height: 1.3;
+    flex-shrink: 0;
   }
-  .team-score.win { color: var(--accent-green); }
 
-  /* Tree Connector Lines (FotMob Blue Style) */
-  .tree-connectors {
-    width: 100%;
-    max-width: 380px;
-    height: 30px;
+  /* Connectors */
+  .connector-container {
+    width: 20px;
     position: relative;
+    align-self: stretch;
+    flex-shrink: 0;
   }
 
-  .line-top-h {
+  .connector-top-arm {
     position: absolute;
-    top: 0;
-    left: 70px;
-    right: 70px;
-    height: 15px;
-    border-bottom: 2px solid var(--line-color);
-    border-left: 2px solid var(--line-color);
-    border-right: 2px solid var(--line-color);
-    border-bottom-left-radius: 8px;
-    border-bottom-right-radius: 8px;
+    top: 25%;
+    left: 0;
+    width: 100%;
+    height: 25%;
+    border-top: 1px solid var(--line-color);
+    border-right: 1px solid var(--line-color);
+    border-top-right-radius: 6px;
   }
 
-  .line-center-v {
+  .connector-bottom-arm {
     position: absolute;
-    top: 15px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 2px;
-    height: 15px;
+    bottom: 25%;
+    left: 0;
+    width: 100%;
+    height: 25%;
+    border-bottom: 1px solid var(--line-color);
+    border-right: 1px solid var(--line-color);
+    border-bottom-right-radius: 6px;
+  }
+
+  .connector-main-line {
+    position: absolute;
+    top: 50%;
+    right: -20px;
+    width: 20px;
+    height: 1px;
     background: var(--line-color);
   }
 
-  .line-straight-v {
-    width: 2px;
-    height: 24px;
-    background: var(--line-color);
+  /* Final Card Details */
+  .trophy-icon {
+    font-size: 24px;
+    margin-left: 4px;
+    opacity: 0.9;
   }
 
-  /* Trophy & Champions */
-  .trophy-box {
-    margin-top: 12px;
-    text-align: center;
+  /* 3rd Place Section */
+  .third-place-wrapper {
+    margin-top: 10px;
+    border-top: 1px dashed var(--border-color);
+    padding-top: 16px;
   }
-  .trophy-icon { font-size: 28px; }
-  .champion-title { font-size: 12px; font-weight: 800; color: #eab308; margin-top: 2px; }
 
 </style>
 </head>
 <body>
 
 <header>
-  <button class="theme-btn" id="themeToggle" onclick="toggleTheme()">🌙 Dark</button>
-  <h1>၂၀၂၆ ခုနှစ်၊ ဖြူးမြို့နယ်စီမံခန့်ခွဲရေးနှင့် အုပ်ချုပ်ရေးကော်မတီ<br>ဥက္ကဌ ဖလား ရပ်ကွက် နှင့် ကျေးရွာအုပ်စု အလွတ်တန်း ဘောလုံးပြိုင်ပွဲ</h1>
-  <p>Official Tournament Center</p>
+  <span class="header-badge">TOURNAMENT 2026</span>
+  <h1>၂၀၂၆ ခုနှစ်၊ ဖြူးမြို့နယ်စီမံခန့်ခွဲရေးနှင့် အုပ်ချုပ်ရေးကော်မတီ<br>ဥက္ကဋ္ဌ ဖလား ရပ်ကွက် နှင့် ကျေးရွာအုပ်စု အလွတ်တန်း ဘောလုံးပြိုင်ပွဲ</h1>
 </header>
 
-<div class="nav-tabs">
-  <button class="tab-btn active" onclick="switchTab('table')">Table</button>
-  <button class="tab-btn" onclick="switchTab('knockout')">Knockout</button>
-  <button class="tab-btn" onclick="switchTab('fixtures')">Fixtures</button>
+<div class="nav-tabs-wrap">
+  <div class="nav-tabs">
+    <button class="tab-btn active" onclick="switchTab('table')">Table</button>
+    <button class="tab-btn" onclick="switchTab('knockout')">Knockout</button>
+    <button class="tab-btn" onclick="switchTab('fixtures')">Fixtures</button>
+  </div>
+  <button class="theme-toggle-btn" id="themeToggle" onclick="toggleTheme()">🌙 Dark</button>
 </div>
 
 <div class="container">
+  <!-- Table Tab -->
   <div id="table-tab" class="tab-content active">
     <div id="tablesContainer"></div>
   </div>
 
-  <!-- Knockout Tab: Refined FotMob Style Bracket -->
+  <!-- Knockout Tab -->
   <div id="knockout-tab" class="tab-content">
-    <div class="bracket-tree">
-      
-      <!-- Semi Finals Row -->
-      <div class="sf-row">
-        <!-- SF 1 -->
-        <div class="bracket-card">
-          <div class="card-header">Semi-Final 1</div>
-          <div class="team-row">
-            <div class="team-info">
-              <span class="team-icon">A1</span>
-              <span class="team-name">Group A 1st</span>
+    
+    <div class="section-title">Semi-Finals & Final</div>
+
+    <!-- Horizontal Bracket -->
+    <div class="horizontal-bracket-wrapper">
+      <div class="bracket-tree">
+        
+        <!-- Semi Finals Column -->
+        <div class="sf-column">
+          <!-- SF 1 -->
+          <div class="b-card">
+            <div class="b-teams">
+              <div class="b-team-row">
+                <span class="b-icon">A1</span>
+                <span class="b-name">1A</span>
+              </div>
+              <div class="b-team-row">
+                <span class="b-icon">B2</span>
+                <span class="b-name">2B</span>
+              </div>
             </div>
-            <span class="team-score">-</span>
-          </div>
-          <div class="team-row">
-            <div class="team-info">
-              <span class="team-icon">B2</span>
-              <span class="team-name">Group B 2nd</span>
+            <div class="b-time-box">
+              Mon, Aug 17<br>3:00 PM
             </div>
-            <span class="team-score">-</span>
           </div>
-        </div>
 
-        <!-- SF 2 -->
-        <div class="bracket-card">
-          <div class="card-header">Semi-Final 2</div>
-          <div class="team-row">
-            <div class="team-info">
-              <span class="team-icon">B1</span>
-              <span class="team-name">Group B 1st</span>
+          <!-- SF 2 -->
+          <div class="b-card">
+            <div class="b-teams">
+              <div class="b-team-row">
+                <span class="b-icon">B1</span>
+                <span class="b-name">1B</span>
+              </div>
+              <div class="b-team-row">
+                <span class="b-icon">A2</span>
+                <span class="b-name">2A</span>
+              </div>
             </div>
-            <span class="team-score">-</span>
-          </div>
-          <div class="team-row">
-            <div class="team-info">
-              <span class="team-icon">A2</span>
-              <span class="team-name">Group A 2nd</span>
+            <div class="b-time-box">
+              Tue, Aug 18<br>3:00 PM
             </div>
-            <span class="team-score">-</span>
           </div>
         </div>
-      </div>
 
-      <!-- Connector Lines -->
-      <div class="tree-connectors">
-        <div class="line-top-h"></div>
-        <div class="line-center-v"></div>
-      </div>
-
-      <!-- Final Match -->
-      <div class="bracket-card" style="border-color: #eab308; width: 160px;">
-        <div class="card-header" style="color: #eab308;">FINAL • 24.8.2026</div>
-        <div class="team-row">
-          <div class="team-info">
-            <span class="team-icon" style="background:#eab308; color:#000">W1</span>
-            <span class="team-name">SF1 Winner</span>
-          </div>
-          <span class="team-score">-</span>
+        <!-- Connectors -->
+        <div class="connector-container">
+          <div class="connector-top-arm"></div>
+          <div class="connector-bottom-arm"></div>
+          <div class="connector-main-line"></div>
         </div>
-        <div class="team-row">
-          <div class="team-info">
-            <span class="team-icon" style="background:#eab308; color:#000">W2</span>
-            <span class="team-name">SF2 Winner</span>
+
+        <!-- Final Column -->
+        <div class="final-column">
+          <div class="b-card" style="border-color: var(--accent-gold);">
+            <div class="b-teams">
+              <div class="b-team-row">
+                <span class="b-icon" style="background: var(--accent-gold); color: #000;">WS1</span>
+                <span class="b-name">WS1</span>
+              </div>
+              <div class="b-team-row">
+                <span class="b-icon" style="background: var(--accent-gold); color: #000;">WS2</span>
+                <span class="b-name">WS2</span>
+              </div>
+            </div>
+            <span class="trophy-icon">🏆</span>
           </div>
-          <span class="team-score">-</span>
-        </div>
-      </div>
-
-      <!-- Connector to 3rd Place -->
-      <div class="line-straight-v"></div>
-
-      <!-- 3rd Place Match -->
-      <div class="bracket-card" style="border-color: #388bfd; width: 160px;">
-        <div class="card-header" style="color: #388bfd;">3RD PLACE • 23.8.2026</div>
-        <div class="team-row">
-          <div class="team-info">
-            <span class="team-icon" style="background:#388bfd; color:#fff">L1</span>
-            <span class="team-name">SF1 Loser</span>
+          <div style="font-size: 10px; color: var(--accent-gold); font-weight: 700; margin-top: 6px; text-align: center;">
+            Mon, Aug 24 • 3:00 PM
           </div>
-          <span class="team-score">-</span>
         </div>
-        <div class="team-row">
-          <div class="team-info">
-            <span class="team-icon" style="background:#388bfd; color:#fff">L2</span>
-            <span class="team-name">SF2 Loser</span>
-          </div>
-          <span class="team-score">-</span>
-        </div>
-      </div>
 
-      <!-- Trophy Section -->
-      <div class="trophy-box">
-        <div class="trophy-icon">🏆</div>
-        <div class="champion-title">CHAMPION 2026</div>
       </div>
-
     </div>
+
+    <!-- 3rd Place Section -->
+    <div class="third-place-wrapper">
+      <div class="section-title" style="color: var(--accent-blue);">3rd Place Match</div>
+      <div class="b-card" style="max-width: 280px; border-color: var(--accent-blue);">
+        <div class="b-teams">
+          <div class="b-team-row">
+            <span class="b-icon" style="background: var(--accent-blue); color: #fff;">LS1</span>
+            <span class="b-name">SF1 Loser</span>
+          </div>
+          <div class="b-team-row">
+            <span class="b-icon" style="background: var(--accent-blue); color: #fff;">LS2</span>
+            <span class="b-name">SF2 Loser</span>
+          </div>
+        </div>
+        <div class="b-time-box">
+          Sun, Aug 23<br>3:00 PM
+        </div>
+      </div>
+    </div>
+
   </div>
 
+  <!-- Fixtures Tab -->
   <div id="fixtures-tab" class="tab-content">
     <div class="section-title">Matches & Results</div>
     <div class="card" id="matchesContainer"></div>
@@ -348,7 +448,7 @@ const matches = [
   { g: "B", home: 2, away: 3, score: "1 - 2", date: "30.7.2026", time: "3:00 PM" },
   { g: "A", home: 0, away: 4, score: "3 - 1", date: "31.7.2026", time: "3:00 PM" },
   { g: "B", home: 0, away: 4, score: "1 - 4", date: "1.8.2026", time: "3:00 PM" },
-  { g: "A", home: 1, away: 2, score: "", date: "2.8.2026", time: "3:00 PM" },
+  { g: "A", home: 1, away: 2, score: "0 - 1", date: "2.8.2026", time: "3:00 PM" },
   { g: "B", home: 1, away: 2, score: "", date: "3.8.2026", time: "3:00 PM" },
   { g: "A", home: 0, away: 3, score: "", date: "4.8.2026", time: "3:00 PM" },
   { g: "B", home: 0, away: 3, score: "", date: "5.8.2026", time: "3:00 PM" },
