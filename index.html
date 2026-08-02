@@ -37,15 +37,16 @@
   .t-away{text-align:left}
   .score-badge{background:#22272e;color:#22c55e;font-weight:700;font-size:12px;padding:5px 8px;border-radius:6px;min-width:46px;text-align:center;border:1px solid #2e3541;flex-shrink:0}
   
-  /* MLS Style Standings Table (Compact for Mobile) */
+  /* MLS Style Standings Table (Compact Grid) */
   .table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
-  table{width:100%;border-collapse:collapse;font-size:12px;table-layout:auto}
-  th{color:#64748b;font-weight:600;padding:8px 2px;font-size:11px;text-align:center;border-bottom:1px solid #262b33}
-  td{padding:10px 2px;text-align:center;border-bottom:1px solid #1c2128;color:#cbd5e1}
+  table{width:100%;border-collapse:collapse;font-size:12px}
+  th{color:#64748b;font-weight:600;padding:8px 4px;font-size:11px;text-align:center;border-bottom:1px solid #262b33;white-space:nowrap}
+  td{padding:10px 4px;text-align:center;border-bottom:1px solid #1c2128;color:#cbd5e1;white-space:nowrap}
   
-  /* အသင်းနာမည် ကော်လံ နေရာ အသေအချာ ညှိထားသည် */
-  td.team-cell{text-align:left;font-weight:700;font-size:13px;color:#ffffff;display:flex;align-items:center;gap:3px;white-space:nowrap;padding-right:4px}
-  .pos{width:16px;color:#94a3b8;font-size:11px;padding-left:2px}
+  /* အသင်းနာမည် ကော်လံကို နေရာ အပြည့်ယူစေပြီး အကွာအဝေး ကျဉ်းထားသည် */
+  th.team-th{text-align:left;width:100%}
+  td.team-cell{text-align:left;font-weight:700;font-size:13px;color:#ffffff;display:flex;align-items:center;gap:3px;white-space:nowrap}
+  .pos{width:18px;color:#94a3b8;font-size:11px;padding-left:2px}
   
   /* Qualified Highlight */
   tr:nth-child(1) .pos-bar, tr:nth-child(2) .pos-bar{content:'';width:3px;height:14px;background:#22c55e;display:inline-block;border-radius:2px;margin-right:2px}
@@ -165,8 +166,8 @@ function renderTables(){
           <table>
             <thead>
               <tr>
-                <th style="width:16px">#</th>
-                <th style="text-align:left">Team</th>
+                <th style="width:18px">#</th>
+                <th class="team-th">Team</th>
                 <th>Pl</th><th>W</th><th>D</th><th>L</th><th>GF</th><th>GA</th><th>GD</th><th>Pts</th>
               </tr>
             </thead>
