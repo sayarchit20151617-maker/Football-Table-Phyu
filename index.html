@@ -6,15 +6,15 @@
 <title>Football Championship 2026</title>
 <style>
   *{box-sizing:border-box;margin:0;padding:0;font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, "Noto Sans Myanmar", sans-serif;}
-  body{background:#000000;color:#ffffff;font-size:13px;padding-bottom:30px}
+  body{background:#080808;color:#ffffff;font-size:13px;padding-bottom:40px}
   
   /* Header UI */
-  header{background:#000000;padding:16px 14px;border-bottom:1px solid #1c1c1e;text-align:center}
+  header{background:#080808;padding:16px 14px;border-bottom:1px solid #1c1c1e;text-align:center}
   header h1{font-size:15px;line-height:1.4;font-weight:600;color:#f1f5f9}
   header p{font-size:11px;color:#94a3b8;margin-top:4px}
   
   /* Navigation Tabs */
-  .nav-tabs{display:flex;background:#000000;border-bottom:1px solid #1c1c1e;position:sticky;top:0;z-index:100;overflow-x:auto}
+  .nav-tabs{display:flex;background:#080808;border-bottom:1px solid #1c1c1e;position:sticky;top:0;z-index:100;overflow-x:auto}
   .tab-btn{padding:12px 16px;text-align:center;font-weight:600;font-size:13px;color:#8e8e93;background:none;border:none;border-bottom:2px solid transparent;cursor:pointer;white-space:nowrap}
   .tab-btn.active{color:#ffffff;border-bottom-color:#22c55e}
   
@@ -22,16 +22,15 @@
   .tab-content{display:none}
   .tab-content.active{display:block}
   
-  /* Section Header & Cards */
+  /* Section Title & Card */
   .section-title{font-size:14px;font-weight:700;color:#22c55e;margin:14px 4px 8px}
   .card{background:#121212;border-radius:12px;padding:6px 2px;margin-bottom:16px;border:1px solid #1c1c1e}
   
-  /* Matches / Fixtures */
+  /* Fixtures Match Row */
   .match-row{display:flex;align-items:center;justify-content:space-between;padding:12px 4px;border-bottom:1px solid #1c1c1e}
   .match-row:last-child{border-bottom:none}
   .match-meta{font-size:10px;color:#8e8e93;width:80px;line-height:1.4;flex-shrink:0}
   .match-teams-wrap{flex:1;display:flex;align-items:center;justify-content:space-between;padding:0 2px}
-  
   .t-name{font-size:13px;font-weight:700;color:#ffffff;width:37%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .t-home{text-align:right}
   .t-away{text-align:left}
@@ -42,29 +41,38 @@
   table{width:100%;border-collapse:collapse;font-size:12px}
   th{color:#8e8e93;font-weight:600;padding:8px 4px;font-size:11px;text-align:center;border-bottom:1px solid #1c1c1e;white-space:nowrap}
   td{padding:10px 4px;text-align:center;border-bottom:1px solid #1c1c1e;color:#cbd5e1;white-space:nowrap}
-  
   th.team-th{text-align:left;width:100%}
   td.team-cell{text-align:left;font-weight:700;font-size:13px;color:#ffffff;display:flex;align-items:center;gap:3px;white-space:nowrap}
   .pos{width:18px;color:#8e8e93;font-size:11px;padding-left:2px}
   tr:nth-child(1) .pos-bar, tr:nth-child(2) .pos-bar{content:'';width:3px;height:14px;background:#22c55e;display:inline-block;border-radius:2px;margin-right:2px}
   .pts{font-weight:700;color:#22c55e}
   
-  /* Knockout Bracket Styles */
-  .ko-sub-nav{display:flex;gap:6px;margin-bottom:16px;overflow-x:auto;padding-bottom:4px}
-  .sub-btn{padding:6px 14px;border-radius:20px;background:#1c1c1e;color:#8e8e93;font-size:12px;font-weight:600;border:none;cursor:pointer;white-space:nowrap}
-  .sub-btn.active{background:#ffffff;color:#000000}
+  /* Vertical Bracket (FotMob Style) */
+  .v-bracket{display:flex;flex-direction:column;align-items:center;gap:16px;padding:10px 0}
   
-  .bracket-container{display:flex;overflow-x:auto;padding:10px 0;gap:12px;-webkit-overflow-scrolling:touch}
-  .bracket-column{display:flex;flex-direction:column;justify-content:space-around;min-width:180px;flex-shrink:0}
+  /* Match Card Box */
+  .v-card{background:#18181b;border-radius:14px;padding:10px 14px;width:170px;border:1px solid #27272a;position:relative;box-shadow:0 4px 12px rgba(0,0,0,0.5)}
+  .v-card-teams{display:flex;justify-content:space-between;gap:8px;align-items:center}
+  .v-team{display:flex;flex-direction:column;align-items:center;width:45%;text-align:center}
+  .v-team .t-code{font-size:12px;font-weight:700;color:#ffffff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+  .v-team .t-score{font-size:14px;font-weight:800;color:#22c55e;margin-top:2px}
+  .v-date{font-size:9px;color:#71717a;text-align:center;margin-top:6px;border-top:1px solid #27272a;padding-top:4px}
   
-  .bracket-card{background:#18181b;border-radius:10px;padding:10px;border:1px solid #27272a;position:relative;margin-bottom:12px}
-  .bracket-team{display:flex;justify-content:space-between;align-items:center;padding:4px 0;font-size:12px;font-weight:600}
-  .bracket-team span.name{color:#f4f4f5}
-  .bracket-team span.score{color:#22c55e;font-weight:700}
-  .bracket-meta{font-size:10px;color:#71717a;border-top:1px solid #27272a;margin-top:6px;padding-top:4px;text-align:right}
+  /* Connectors (Vertical Lines) */
+  .line-v{width:2px;height:16px;background:#3f3f46}
   
-  .trophy-card{background:#18181b;border-radius:10px;padding:14px 10px;border:1px solid #27272a;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center}
-  .trophy-icon{font-size:24px;margin-bottom:2px}
+  /* Split Bracket Top & Bottom */
+  .v-row-two{display:flex;justify-content:space-between;width:100%;max-width:340px}
+  .v-branch{display:flex;flex-direction:column;align-items:center}
+  
+  .v-fork{width:160px;height:12px;border-top:2px solid #3f3f46;border-left:2px solid #3f3f46;border-right:2px solid #3f3f46}
+  .v-fork-bottom{width:160px;height:12px;border-bottom:2px solid #3f3f46;border-left:2px solid #3f3f46;border-right:2px solid #3f3f46}
+
+  /* Badges */
+  .badge-label{font-size:9px;font-weight:800;padding:2px 6px;border-radius:4px;text-transform:uppercase;margin-bottom:4px;display:inline-block}
+  .badge-sf{background:#27272a;color:#a1a1aa}
+  .badge-third{background:#3b82f6;color:#ffffff}
+  .badge-final{background:#eab308;color:#000000}
 </style>
 </head>
 <body>
@@ -86,50 +94,65 @@
     <div id="tablesContainer"></div>
   </div>
 
-  <!-- Knockout Tab -->
+  <!-- Knockout Tab (FotMob Vertical Tree View) -->
   <div id="knockout-tab" class="tab-content">
-    <div class="ko-sub-nav">
-      <button class="sub-btn active" id="btn-all" onclick="filterKnockout('all')">All</button>
-      <button class="sub-btn" id="btn-sf" onclick="filterKnockout('sf')">Semi-final</button>
-      <button class="sub-btn" id="btn-third" onclick="filterKnockout('third')">3rd Place</button>
-      <button class="sub-btn" id="btn-f" onclick="filterKnockout('f')">Final</button>
-    </div>
-    
-    <div class="bracket-container" id="bracketView">
-      <!-- Semi Finals Column -->
-      <div class="bracket-column" id="col-sf">
-        <div class="bracket-card">
-          <div class="bracket-team"><span class="name">Group A (1st)</span><span class="score">-</span></div>
-          <div class="bracket-team"><span class="name">Group B (2nd)</span><span class="score">-</span></div>
-          <div class="bracket-meta">17.8.2026 • 3:00 PM</div>
-        </div>
-        <div class="bracket-card">
-          <div class="bracket-team"><span class="name">Group B (1st)</span><span class="score">-</span></div>
-          <div class="bracket-team"><span class="name">Group A (2nd)</span><span class="score">-</span></div>
-          <div class="bracket-meta">18.8.2026 • 3:00 PM</div>
-        </div>
-      </div>
+    <div class="v-bracket">
       
-      <!-- 3rd Place Match Column -->
-      <div class="bracket-column" id="col-third">
-        <div class="bracket-card">
-          <div style="font-size:11px;color:#eab308;font-weight:700;margin-bottom:4px">🥉 တတိယလုပွဲ</div>
-          <div class="bracket-team"><span class="name">SF1 Loser</span><span class="score">-</span></div>
-          <div class="bracket-team"><span class="name">SF2 Loser</span><span class="score">-</span></div>
-          <div class="bracket-meta">23.8.2026 • 3:00 PM</div>
+      <!-- Top Semi Finals -->
+      <div class="v-row-two">
+        <div class="v-branch">
+          <span class="badge-label badge-sf">Semi-Final 1</span>
+          <div class="v-card">
+            <div class="v-card-teams">
+              <div class="v-team"><span class="t-code">Group A 1st</span><span class="t-score">-</span></div>
+              <div class="v-team"><span class="t-code">Group B 2nd</span><span class="t-score">-</span></div>
+            </div>
+            <div class="v-date">17.8.2026 • 3:00 PM</div>
+          </div>
+        </div>
+
+        <div class="v-branch">
+          <span class="badge-label badge-sf">Semi-Final 2</span>
+          <div class="v-card">
+            <div class="v-card-teams">
+              <div class="v-team"><span class="t-code">Group B 1st</span><span class="t-score">-</span></div>
+              <div class="v-team"><span class="t-code">Group A 2nd</span><span class="t-score">-</span></div>
+            </div>
+            <div class="v-date">18.8.2026 • 3:00 PM</div>
+          </div>
         </div>
       </div>
 
-      <!-- Final Column -->
-      <div class="bracket-column" id="col-f">
-        <div class="bracket-card trophy-card">
-          <div class="trophy-icon">🏆</div>
-          <div style="font-size:11px;color:#22c55e;font-weight:700;margin-bottom:6px">ဗိုလ်လုပွဲ</div>
-          <div class="bracket-team" style="width:100%"><span class="name">SF1 Winner</span><span class="score">-</span></div>
-          <div class="bracket-team" style="width:100%"><span class="name">SF2 Winner</span><span class="score">-</span></div>
-          <div class="bracket-meta" style="width:100%">24.8.2026 • 3:00 PM</div>
+      <!-- Fork Lines connecting to Center -->
+      <div class="v-fork-bottom"></div>
+      <div class="line-v"></div>
+
+      <!-- Final Match -->
+      <div class="v-branch">
+        <span class="badge-label badge-final">FINAL</span>
+        <div class="v-card" style="border-color:#eab308">
+          <div class="v-card-teams">
+            <div class="v-team"><span class="t-code">SF1 Winner</span><span class="t-score">-</span></div>
+            <div class="v-team"><span class="t-code">SF2 Winner</span><span class="t-score">-</span></div>
+          </div>
+          <div class="v-date" style="color:#eab308">24.8.2026 • 3:00 PM</div>
         </div>
       </div>
+
+      <div class="line-v"></div>
+
+      <!-- 3rd Place Match -->
+      <div class="v-branch">
+        <span class="badge-label badge-third">3RD PLACE</span>
+        <div class="v-card" style="border-color:#3b82f6">
+          <div class="v-card-teams">
+            <div class="v-team"><span class="t-code">SF1 Loser</span><span class="t-score">-</span></div>
+            <div class="v-team"><span class="t-code">SF2 Loser</span><span class="t-score">-</span></div>
+          </div>
+          <div class="v-date" style="color:#60a5fa">23.8.2026 • 3:00 PM</div>
+        </div>
+      </div>
+
     </div>
   </div>
 
@@ -182,35 +205,6 @@ function switchTab(tab) {
   } else {
     document.querySelectorAll('.tab-btn')[2].classList.add('active');
     document.getElementById('fixtures-tab').classList.add('active');
-  }
-}
-
-function filterKnockout(type) {
-  document.querySelectorAll('.sub-btn').forEach(b => b.classList.remove('active'));
-  const colSf = document.getElementById('col-sf');
-  const colThird = document.getElementById('col-third');
-  const colF = document.getElementById('col-f');
-  
-  if(type === 'all') {
-    document.getElementById('btn-all').classList.add('active');
-    colSf.style.display = 'flex';
-    colThird.style.display = 'flex';
-    colF.style.display = 'flex';
-  } else if(type === 'sf') {
-    document.getElementById('btn-sf').classList.add('active');
-    colSf.style.display = 'flex';
-    colThird.style.display = 'none';
-    colF.style.display = 'none';
-  } else if(type === 'third') {
-    document.getElementById('btn-third').classList.add('active');
-    colSf.style.display = 'none';
-    colThird.style.display = 'flex';
-    colF.style.display = 'none';
-  } else if(type === 'f') {
-    document.getElementById('btn-f').classList.add('active');
-    colSf.style.display = 'none';
-    colThird.style.display = 'none';
-    colF.style.display = 'flex';
   }
 }
 
