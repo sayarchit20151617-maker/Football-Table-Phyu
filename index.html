@@ -12,7 +12,6 @@
 
 <style>
   :root {
-    /* Deeper Navy Blue for Dark Mode */
     --bg-color: #0a1526;
     --card-bg: #142238;
     --card-inner: #1e304d;
@@ -23,10 +22,10 @@
     --accent-green: #2ea043;
     --accent-gold: #eab308;
     --accent-blue: #388bfd;
+    --accent-red: #da3633;
   }
 
   body.light-mode {
-    /* Richer Medium-Light Blue Tone for Light Mode */
     --bg-color: #bcd8f5;
     --card-bg: #ffffff;
     --card-inner: #a8cef2;
@@ -37,9 +36,9 @@
     --accent-green: #1a7f37;
     --accent-gold: #ca8a04;
     --accent-blue: #0969da;
+    --accent-red: #cf222e;
   }
 
-  /* Universal Perfect Font & Accurate Rendering Rules */
   *{
     box-sizing: border-box;
     margin: 0;
@@ -47,7 +46,6 @@
     font-family: 'Noto Sans Myanmar', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
-    font-variant-ligatures: normal;
     transition: background-color 0.2s, color 0.2s;
   }
 
@@ -55,11 +53,10 @@
     background: var(--bg-color);
     color: var(--text-color);
     font-size: 13px;
-    padding-bottom: 40px;
+    padding-bottom: 20px;
     line-height: 1.5;
   }
   
-  /* Modern Header with Beautiful & Accurate Myanmar Title */
   header{
     background: linear-gradient(180deg, var(--card-bg) 0%, var(--bg-color) 100%);
     padding: 20px 16px 14px;
@@ -78,16 +75,13 @@
     letter-spacing: 0.5px;
   }
   
-  /* Clear & Accurate Title Font */
   header h1{
     font-size: 15px;
     line-height: 1.6;
     font-weight: 700;
     color: var(--text-color);
-    letter-spacing: 0.1px;
   }
 
-  /* Navigation Bar + Integrated Dark Switch */
   .nav-tabs-wrap {
     display: flex;
     align-items: center;
@@ -120,7 +114,6 @@
     border-bottom-color: var(--accent-green);
   }
 
-  /* Inline Switch Button */
   .theme-toggle-btn {
     background: var(--card-inner);
     color: var(--text-color);
@@ -143,8 +136,19 @@
   .section-title{font-size:13px;font-weight:700;color:var(--text-sub);margin:14px 4px 8px; text-transform: uppercase; letter-spacing: 0.5px;}
   .card{background:var(--card-bg);border-radius:12px;padding:6px 2px;margin-bottom:16px;border:1px solid var(--border-color); box-shadow: 0 4px 12px rgba(0,0,0,0.08);}
   
-  /* Fixtures Match Row */
-  .match-row{display:flex;align-items:center;justify-content:space-between;padding:12px 4px;border-bottom:1px solid var(--border-color)}
+  /* Clickable Match Row */
+  .match-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:12px 8px;
+    border-bottom:1px solid var(--border-color);
+    cursor: pointer;
+    border-radius: 8px;
+  }
+  .match-row:hover {
+    background: var(--card-inner);
+  }
   .match-row:last-child{border-bottom:none}
   .match-meta{font-size:10px;color:var(--text-sub);width:80px;line-height:1.4;flex-shrink:0}
   .match-teams-wrap{flex:1;display:flex;align-items:center;justify-content:space-between;padding:0 2px}
@@ -160,152 +164,141 @@
   td{padding:10px 4px;text-align:center;border-bottom:1px solid var(--border-color);color:var(--text-color);white-space:nowrap}
   th.team-th{text-align:left;width:100%}
   td.team-cell{text-align:left;font-weight:700;font-size:13px;color:var(--text-color);display:flex;align-items:center;gap:3px;white-space:nowrap}
+  
+  /* Clickable Table Row */
+  tbody tr { cursor: pointer; }
+  tbody tr:hover { background: var(--card-inner); }
+
   .pos{width:18px;color:var(--text-sub);font-size:11px;padding-left:2px}
   tr:nth-child(1) .pos-bar, tr:nth-child(2) .pos-bar{content:'';width:3px;height:14px;background:var(--accent-green);display:inline-block;border-radius:2px;margin-right:2px}
   .pts{font-weight:700;color:var(--accent-green)}
-  
-  /* FotMob Horizontal Bracket Layout */
-  .horizontal-bracket-wrapper {
-    overflow-x: auto;
-    padding: 10px 0 20px;
-    -webkit-overflow-scrolling: touch;
-  }
 
-  .bracket-tree {
-    display: flex;
-    align-items: center;
-    min-width: 340px;
-    position: relative;
-    padding-right: 10px;
-  }
+  .form-container { display: flex; gap: 3px; justify-content: center; align-items: center; }
+  .f-badge { width: 16px; height: 16px; border-radius: 4px; font-size: 9px; font-weight: 800; color: #ffffff; display: inline-flex; align-items: center; justify-content: center; }
+  .f-w { background-color: var(--accent-green); }
+  .f-d { background-color: var(--accent-gold); color: #000; }
+  .f-l { background-color: var(--accent-red); }
 
-  /* Left Column: Semi Finals */
-  .sf-column {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    width: 170px;
-    flex-shrink: 0;
-  }
+  /* Bracket Styles */
+  .horizontal-bracket-wrapper { overflow-x: auto; padding: 10px 0 20px; }
+  .bracket-tree { display: flex; align-items: center; min-width: 340px; position: relative; padding-right: 10px; }
+  .sf-column { display: flex; flex-direction: column; gap: 20px; width: 170px; flex-shrink: 0; }
+  .final-column { width: 150px; flex-shrink: 0; margin-left: 20px; }
+  .b-card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; padding: 10px; display: flex; justify-content: space-between; align-items: center; position: relative; }
+  .b-teams { display: flex; flex-direction: column; gap: 8px; flex: 1; }
+  .b-team-row { display: flex; align-items: center; gap: 6px; }
+  .b-icon { width: 16px; height: 16px; border-radius: 50%; background: var(--card-inner); border: 1px solid var(--border-color); display: flex; align-items: center; justify-content: center; font-size: 8px; font-weight: bold; color: var(--text-sub); }
+  .b-name { font-size: 11px; font-weight: 700; color: var(--text-color); white-space: nowrap; }
+  .b-time-box { text-align: right; border-left: 1px solid var(--border-color); padding-left: 8px; margin-left: 6px; font-size: 9px; color: var(--text-sub); line-height: 1.3; flex-shrink: 0; }
+  .connector-container { width: 20px; position: relative; align-self: stretch; flex-shrink: 0; }
+  .connector-top-arm { position: absolute; top: 25%; left: 0; width: 100%; height: 25%; border-top: 1px solid var(--line-color); border-right: 1px solid var(--line-color); border-top-right-radius: 6px; }
+  .connector-bottom-arm { position: absolute; bottom: 25%; left: 0; width: 100%; height: 25%; border-bottom: 1px solid var(--line-color); border-right: 1px solid var(--line-color); border-bottom-right-radius: 6px; }
+  .connector-main-line { position: absolute; top: 50%; right: -20px; width: 20px; height: 1px; background: var(--line-color); }
+  .trophy-icon { font-size: 24px; margin-left: 4px; }
+  .third-place-wrapper { margin-top: 10px; border-top: 1px dashed var(--border-color); padding-top: 16px; }
 
-  /* Right Column: Final */
-  .final-column {
-    width: 150px;
-    flex-shrink: 0;
-    margin-left: 20px;
-  }
-
-  /* Match Card */
-  .b-card {
-    background: var(--card-bg);
-    border: 1px solid var(--border-color);
-    border-radius: 12px;
-    padding: 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: relative;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-  }
-
-  .b-teams {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    flex: 1;
-  }
-
-  .b-team-row {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
-
-  .b-icon {
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    background: var(--card-inner);
-    border: 1px solid var(--border-color);
-    display: flex;
-    align-items: center;
+  /* --- POPUP MODAL DESIGN --- */
+  .modal-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: none;
     justify-content: center;
-    font-size: 8px;
-    font-weight: bold;
-    color: var(--text-sub);
+    align-items: flex-end;
+    z-index: 1000;
   }
+  .modal-overlay.active { display: flex; }
 
-  .b-name {
-    font-size: 11px;
-    font-weight: 700;
-    color: var(--text-color);
-    white-space: nowrap;
-  }
-
-  .b-time-box {
-    text-align: right;
-    border-left: 1px solid var(--border-color);
-    padding-left: 8px;
-    margin-left: 6px;
-    font-size: 9px;
-    color: var(--text-sub);
-    line-height: 1.3;
-    flex-shrink: 0;
-  }
-
-  /* Connectors */
-  .connector-container {
-    width: 20px;
+  .modal-card {
+    background: var(--card-bg);
+    width: 100%;
+    max-width: 550px;
+    border-radius: 20px 20px 0 0;
+    padding: 20px 16px;
+    max-height: 85vh;
+    overflow-y: auto;
     position: relative;
-    align-self: stretch;
-    flex-shrink: 0;
+    animation: slideUp 0.3s ease-out;
+    border-top: 1px solid var(--border-color);
   }
 
-  .connector-top-arm {
+  @keyframes slideUp {
+    from { transform: translateY(100%); }
+    to { transform: translateY(0); }
+  }
+
+  .close-btn {
     position: absolute;
-    top: 25%;
-    left: 0;
-    width: 100%;
-    height: 25%;
-    border-top: 1px solid var(--line-color);
-    border-right: 1px solid var(--line-color);
-    border-top-right-radius: 6px;
+    top: 15px; right: 15px;
+    background: var(--card-inner);
+    color: var(--text-color);
+    border: none;
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    font-weight: bold;
+    cursor: pointer;
   }
 
-  .connector-bottom-arm {
-    position: absolute;
-    bottom: 25%;
-    left: 0;
-    width: 100%;
-    height: 25%;
-    border-bottom: 1px solid var(--line-color);
-    border-right: 1px solid var(--line-color);
-    border-bottom-right-radius: 6px;
-  }
+  .m-header { text-align: center; margin-bottom: 15px; }
+  .m-title-text { font-size: 16px; font-weight: 800; margin-top: 6px; color: var(--text-color); }
 
-  .connector-main-line {
-    position: absolute;
-    top: 50%;
-    right: -20px;
-    width: 20px;
-    height: 1px;
-    background: var(--line-color);
+  .m-sub-card {
+    background: var(--card-inner);
+    border-radius: 12px;
+    padding: 12px;
+    margin-bottom: 12px;
+    font-size: 12px;
   }
+  .m-sub-title { font-weight: bold; color: var(--text-sub); margin-bottom: 8px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .m-row { display: flex; justify-content: space-between; padding: 5px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+  .m-row:last-child { border: none; }
 
-  /* Final Card Details */
-  .trophy-icon {
-    font-size: 24px;
-    margin-left: 4px;
-    opacity: 0.9;
+  /* TEAM STATS GRID */
+  .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; text-align: center; margin-bottom: 12px; }
+  .stat-box { background: var(--card-inner); padding: 8px 4px; border-radius: 8px; border: 1px solid var(--border-color); }
+  .stat-val { font-size: 14px; font-weight: 800; color: var(--accent-green); }
+  .stat-lbl { font-size: 9px; color: var(--text-sub); margin-top: 2px; }
+
+  /* TEAM MATCH LIST */
+  .team-match-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--card-bg);
+    padding: 8px 10px;
+    border-radius: 8px;
+    font-size: 11px;
+    border: 1px solid var(--border-color);
+    margin-bottom: 6px;
   }
+  .team-match-opp { font-weight: 700; color: var(--text-color); }
+  .team-match-meta { font-size: 9px; color: var(--text-sub); }
+  .form-res-badge { padding: 3px 8px; border-radius: 4px; font-weight: 800; font-size: 10px; color: #fff; }
 
-  /* 3rd Place Section */
-  .third-place-wrapper {
-    margin-top: 10px;
-    border-top: 1px dashed var(--border-color);
-    padding-top: 16px;
+  /* MATCH DETAIL DESIGN */
+  .m-teams-flex { display: flex; justify-content: space-around; align-items: center; margin: 12px 0; }
+  .m-team { text-align: center; width: 40%; }
+  .m-team-name { font-size: 14px; font-weight: bold; margin-top: 5px; }
+  .m-score { font-size: 24px; font-weight: 800; color: var(--accent-green); background: var(--card-inner); padding: 4px 12px; border-radius: 8px; border: 1px solid var(--border-color); }
+  .team-form-grid { display: flex; gap: 10px; justify-content: space-between; }
+  .form-col { width: 49%; display: flex; flex-direction: column; gap: 6px; }
+  .form-col-title { font-size: 11px; font-weight: 700; color: var(--text-color); text-align: center; margin-bottom: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .form-match-item { display: flex; align-items: center; justify-content: space-between; background: var(--card-bg); padding: 6px 8px; border-radius: 6px; font-size: 10px; border: 1px solid var(--border-color); }
+  .form-team-txt { font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 60px; }
+
+  /* FOOTER STYLES */
+  footer {
+    text-align: center;
+    padding: 20px 10px 10px;
+    margin-top: 20px;
+    border-top: 1px solid var(--border-color);
+    font-size: 12px;
+    color: var(--text-sub);
   }
-
+  footer strong {
+    color: var(--accent-green);
+    font-weight: 700;
+  }
 </style>
 </head>
 <body>
@@ -325,113 +318,74 @@
 </div>
 
 <div class="container">
-  <!-- Table Tab -->
   <div id="table-tab" class="tab-content active">
     <div id="tablesContainer"></div>
   </div>
 
-  <!-- Knockout Tab -->
   <div id="knockout-tab" class="tab-content">
-    
     <div class="section-title">Semi-Finals & Final</div>
-
-    <!-- Horizontal Bracket -->
     <div class="horizontal-bracket-wrapper">
       <div class="bracket-tree">
-        
-        <!-- Semi Finals Column -->
         <div class="sf-column">
-          <!-- SF 1 -->
           <div class="b-card">
             <div class="b-teams">
-              <div class="b-team-row">
-                <span class="b-icon">A1</span>
-                <span class="b-name">1A</span>
-              </div>
-              <div class="b-team-row">
-                <span class="b-icon">B2</span>
-                <span class="b-name">2B</span>
-              </div>
+              <div class="b-team-row"><span class="b-icon">A1</span><span class="b-name">1A</span></div>
+              <div class="b-team-row"><span class="b-icon">B2</span><span class="b-name">2B</span></div>
             </div>
-            <div class="b-time-box">
-              Mon, Aug 17<br>3:00 PM
-            </div>
+            <div class="b-time-box">Mon, Aug 17<br>3:00 PM</div>
           </div>
-
-          <!-- SF 2 -->
           <div class="b-card">
             <div class="b-teams">
-              <div class="b-team-row">
-                <span class="b-icon">B1</span>
-                <span class="b-name">1B</span>
-              </div>
-              <div class="b-team-row">
-                <span class="b-icon">A2</span>
-                <span class="b-name">2A</span>
-              </div>
+              <div class="b-team-row"><span class="b-icon">B1</span><span class="b-name">1B</span></div>
+              <div class="b-team-row"><span class="b-icon">A2</span><span class="b-name">2A</span></div>
             </div>
-            <div class="b-time-box">
-              Tue, Aug 18<br>3:00 PM
-            </div>
+            <div class="b-time-box">Tue, Aug 18<br>3:00 PM</div>
           </div>
         </div>
-
-        <!-- Connectors -->
         <div class="connector-container">
           <div class="connector-top-arm"></div>
           <div class="connector-bottom-arm"></div>
           <div class="connector-main-line"></div>
         </div>
-
-        <!-- Final Column -->
         <div class="final-column">
           <div class="b-card" style="border-color: var(--accent-gold);">
             <div class="b-teams">
-              <div class="b-team-row">
-                <span class="b-icon" style="background: var(--accent-gold); color: #000;">WS1</span>
-                <span class="b-name">WS1</span>
-              </div>
-              <div class="b-team-row">
-                <span class="b-icon" style="background: var(--accent-gold); color: #000;">WS2</span>
-                <span class="b-name">WS2</span>
-              </div>
+              <div class="b-team-row"><span class="b-icon" style="background: var(--accent-gold); color: #000;">WS1</span><span class="b-name">WS1</span></div>
+              <div class="b-team-row"><span class="b-icon" style="background: var(--accent-gold); color: #000;">WS2</span><span class="b-name">WS2</span></div>
             </div>
             <span class="trophy-icon">🏆</span>
           </div>
-          <div style="font-size: 10px; color: var(--accent-gold); font-weight: 700; margin-top: 6px; text-align: center;">
-            Mon, Aug 24 • 3:00 PM
-          </div>
+          <div style="font-size: 10px; color: var(--accent-gold); font-weight: 700; margin-top: 6px; text-align: center;">Mon, Aug 24 • 3:00 PM</div>
         </div>
-
       </div>
     </div>
-
-    <!-- 3rd Place Section -->
     <div class="third-place-wrapper">
       <div class="section-title" style="color: var(--accent-blue);">3rd Place Match</div>
       <div class="b-card" style="max-width: 280px; border-color: var(--accent-blue);">
         <div class="b-teams">
-          <div class="b-team-row">
-            <span class="b-icon" style="background: var(--accent-blue); color: #fff;">LS1</span>
-            <span class="b-name">SF1 Loser</span>
-          </div>
-          <div class="b-team-row">
-            <span class="b-icon" style="background: var(--accent-blue); color: #fff;">LS2</span>
-            <span class="b-name">SF2 Loser</span>
-          </div>
+          <div class="b-team-row"><span class="b-icon" style="background: var(--accent-blue); color: #fff;">LS1</span><span class="b-name">SF1 Loser</span></div>
+          <div class="b-team-row"><span class="b-icon" style="background: var(--accent-blue); color: #fff;">LS2</span><span class="b-name">SF2 Loser</span></div>
         </div>
-        <div class="b-time-box">
-          Sun, Aug 23<br>3:00 PM
-        </div>
+        <div class="b-time-box">Sun, Aug 23<br>3:00 PM</div>
       </div>
     </div>
-
   </div>
 
-  <!-- Fixtures Tab -->
   <div id="fixtures-tab" class="tab-content">
-    <div class="section-title">Matches & Results</div>
+    <div class="section-title">Matches & Results (Click for details)</div>
     <div class="card" id="matchesContainer"></div>
+  </div>
+
+  <!-- FOOTER WITH ORGANIZER NAME -->
+  <footer>
+    Organized by : <strong>Sayar Chit</strong>
+  </footer>
+</div>
+
+<!-- GENERAL POPUP MODAL -->
+<div class="modal-overlay" id="popupModal" onclick="closeModal(event)">
+  <div class="modal-card" id="modalBody">
+    <!-- Dynamic Content Loaded Here -->
   </div>
 </div>
 
@@ -467,11 +421,7 @@ const matches = [
 function toggleTheme() {
   document.body.classList.toggle('light-mode');
   const btn = document.getElementById('themeToggle');
-  if(document.body.classList.contains('light-mode')) {
-    btn.innerHTML = '☀️ Light';
-  } else {
-    btn.innerHTML = '🌙 Dark';
-  }
+  btn.innerHTML = document.body.classList.contains('light-mode') ? '☀️ Light' : '🌙 Dark';
 }
 
 function switchTab(tab) {
@@ -492,11 +442,11 @@ function switchTab(tab) {
 
 function renderFixtures(){
   const box = document.getElementById("matchesContainer");
-  box.innerHTML = matches.map(m => {
+  box.innerHTML = matches.map((m, index) => {
     const hName = teams[m.g][m.home];
     const aName = teams[m.g][m.away];
     return `
-      <div class="match-row">
+      <div class="match-row" onclick="openMatchDetail(${index})">
         <div class="match-meta"><b>Group ${m.g}</b><br>${m.date}<br><span style="color:var(--accent-green)">${m.time}</span></div>
         <div class="match-teams-wrap">
           <span class="t-name t-home">${escapeHtml(hName)}</span>
@@ -508,20 +458,203 @@ function renderFixtures(){
   }).join("");
 }
 
+// Get All Played Matches for a Team
+function getTeamMatches(group, teamIndex) {
+  return matches.filter(m => 
+    m.g === group && 
+    (m.home === teamIndex || m.away === teamIndex) && 
+    /^\d+\s*[-:]\s*\d+$/.test((m.score||'').trim())
+  );
+}
+
+// CLICK TEAM IN TABLE -> OPEN TEAM DETAIL POPUP
+function openTeamDetail(group, teamIndex) {
+  const teamName = teams[group][teamIndex];
+  const allTeamMatches = matches.filter(m => m.g === group && (m.home === teamIndex || m.away === teamIndex));
+  
+  // Calculate Stats
+  let pl = 0, w = 0, d = 0, l = 0, gf = 0, ga = 0, pts = 0;
+  const playedList = [];
+
+  allTeamMatches.forEach(m => {
+    const isPlayed = /^\d+\s*[-:]\s*\d+$/.test((m.score||'').trim());
+    if (isPlayed) {
+      pl++;
+      const [hG, aG] = m.score.split(/[-:]/).map(Number);
+      const myG = m.home === teamIndex ? hG : aG;
+      const oppG = m.home === teamIndex ? aG : hG;
+      gf += myG; ga += oppG;
+
+      let res = 'D', bg = 'var(--accent-gold)';
+      if (myG > oppG) { w++; pts += 3; res = 'W'; bg = 'var(--accent-green)'; }
+      else if (myG < oppG) { l++; res = 'L'; bg = 'var(--accent-red)'; }
+      else { d++; pts += 1; }
+
+      const oppIdx = m.home === teamIndex ? m.away : m.home;
+      playedList.push({ oppName: teams[group][oppIdx], score: m.score, res, bg, date: m.date });
+    }
+  });
+
+  const gd = gf - ga;
+
+  let matchesHtml = playedList.map(item => `
+    <div class="team-match-item">
+      <div>
+        <div class="team-match-opp">vs ${escapeHtml(item.oppName)}</div>
+        <div class="team-match-meta">${item.date}</div>
+      </div>
+      <span class="form-res-badge" style="background:${item.bg}">${item.score} (${item.res})</span>
+    </div>
+  `).join('');
+
+  if (playedList.length === 0) {
+    matchesHtml = `<div style="text-align:center; color:var(--text-sub); padding:10px;">ပွဲကစားထားခြင်း မရှိသေးပါ</div>`;
+  }
+
+  const modalHtml = `
+    <button class="close-btn" onclick="hideModal()">✕</button>
+    <div class="m-header">
+      <span class="header-badge">GROUP ${group}</span>
+      <div class="m-title-text">${escapeHtml(teamName)}</div>
+    </div>
+
+    <!-- Quick Stats -->
+    <div class="stats-grid">
+      <div class="stat-box"><div class="stat-val">${pts}</div><div class="stat-lbl">POINTS</div></div>
+      <div class="stat-box"><div class="stat-val">${pl}</div><div class="stat-lbl">PLAYED</div></div>
+      <div class="stat-box"><div class="stat-val">${w}-${d}-${l}</div><div class="stat-lbl">W-D-L</div></div>
+      <div class="stat-box"><div class="stat-val">${gd > 0 ? '+'+gd : gd}</div><div class="stat-lbl">GD</div></div>
+    </div>
+
+    <div class="m-sub-card">
+      <div class="m-sub-title">Team Performance</div>
+      <div class="m-row"><span>Goals Scored (GF)</span><strong>${gf}</strong></div>
+      <div class="m-row"><span>Goals Conceded (GA)</span><strong>${ga}</strong></div>
+    </div>
+
+    <!-- Match Results List -->
+    <div class="m-sub-card">
+      <div class="m-sub-title">Played Matches</div>
+      ${matchesHtml}
+    </div>
+  `;
+
+  document.getElementById('modalBody').innerHTML = modalHtml;
+  document.getElementById('popupModal').classList.add('active');
+}
+
+// CLICK MATCH IN FIXTURES -> OPEN MATCH DETAIL POPUP
+function openMatchDetail(index) {
+  const m = matches[index];
+  const hName = teams[m.g][m.home];
+  const aName = teams[m.g][m.away];
+
+  const homeMatches = getTeamMatches(m.g, m.home);
+  let homeHtml = `<div class="form-col-title">${escapeHtml(hName)}</div>`;
+  if (homeMatches.length === 0) {
+    homeHtml += `<div style="text-align:center; color:var(--text-sub); font-size:10px;">ပွဲမကစားရသေးပါ</div>`;
+  } else {
+    homeMatches.forEach(hm => {
+      const oppIndex = hm.home === m.home ? hm.away : hm.home;
+      const oppName = teams[hm.g][oppIndex];
+      const [hG, aG] = hm.score.split(/[-:]/).map(Number);
+      const myGoals = hm.home === m.home ? hG : aG;
+      const oppGoals = hm.home === m.home ? aG : hG;
+
+      let badgeBg = 'var(--accent-gold)', resTxt = 'D';
+      if (myGoals > oppGoals) { badgeBg = 'var(--accent-green)'; resTxt = 'W'; }
+      else if (myGoals < oppGoals) { badgeBg = 'var(--accent-red)'; resTxt = 'L'; }
+
+      homeHtml += `
+        <div class="form-match-item">
+          <span class="form-team-txt">${escapeHtml(oppName)}</span>
+          <span class="form-res-badge" style="background:${badgeBg}">${hm.score} (${resTxt})</span>
+        </div>`;
+    });
+  }
+
+  const awayMatches = getTeamMatches(m.g, m.away);
+  let awayHtml = `<div class="form-col-title">${escapeHtml(aName)}</div>`;
+  if (awayMatches.length === 0) {
+    awayHtml += `<div style="text-align:center; color:var(--text-sub); font-size:10px;">ပွဲမကစားရသေးပါ</div>`;
+  } else {
+    awayMatches.forEach(am => {
+      const oppIndex = am.home === m.away ? am.away : am.home;
+      const oppName = teams[am.g][oppIndex];
+      const [hG, aG] = am.score.split(/[-:]/).map(Number);
+      const myGoals = am.home === m.away ? aG : hG;
+      const oppGoals = am.home === m.away ? hG : aG;
+
+      let badgeBg = 'var(--accent-gold)', resTxt = 'D';
+      if (myGoals > oppGoals) { badgeBg = 'var(--accent-green)'; resTxt = 'W'; }
+      else if (myGoals < oppGoals) { badgeBg = 'var(--accent-red)'; resTxt = 'L'; }
+
+      awayHtml += `
+        <div class="form-match-item">
+          <span class="form-team-txt">${escapeHtml(oppName)}</span>
+          <span class="form-res-badge" style="background:${badgeBg}">${am.score} (${resTxt})</span>
+        </div>`;
+    });
+  }
+
+  const modalHtml = `
+    <button class="close-btn" onclick="hideModal()">✕</button>
+    <div class="m-header">
+      <span class="header-badge">GROUP ${m.g}</span>
+      <div class="m-teams-flex">
+        <div class="m-team"><div class="m-team-name">${escapeHtml(hName)}</div></div>
+        <div class="m-score">${m.score || 'VS'}</div>
+        <div class="m-team"><div class="m-team-name">${escapeHtml(aName)}</div></div>
+      </div>
+    </div>
+
+    <div class="m-sub-card">
+      <div class="m-sub-title">Match Info</div>
+      <div class="m-row"><span>Date & Time</span><strong>${m.date} (${m.time})</strong></div>
+      <div class="m-row"><span>Venue</span><strong>Phyu Township Sports Ground</strong></div>
+    </div>
+
+    <div class="m-sub-card">
+      <div class="m-sub-title">Team Form (Recent Matches)</div>
+      <div class="team-form-grid">
+        <div class="form-col">${homeHtml}</div>
+        <div class="form-col">${awayHtml}</div>
+      </div>
+    </div>
+  `;
+
+  document.getElementById('modalBody').innerHTML = modalHtml;
+  document.getElementById('popupModal').classList.add('active');
+}
+
+function hideModal() {
+  document.getElementById('popupModal').classList.remove('active');
+}
+
+function closeModal(e) {
+  if (e.target.id === 'popupModal') hideModal();
+}
+
 function stats(g){
   const teamList = teams[g] || [];
-  const st = teamList.map((name, i) => ({name, pl:0, w:0, d:0, l:0, gf:0, ga:0, gd:0, pts:0, i}));
+  const st = teamList.map((name, i) => ({name, pl:0, w:0, d:0, l:0, gf:0, ga:0, gd:0, pts:0, form:[], teamIdx: i}));
+  
   matches.filter(m => m.g === g && /^\d+\s*[-:]\s*\d+$/.test((m.score||'').trim()) && m.home !== m.away).forEach(m => {
     const [a, b] = m.score.split(/[-:]/).map(Number);
     const h = st[m.home], aw = st[m.away];
     if(h && aw){
       h.pl++; aw.pl++; h.gf += a; h.ga += b; aw.gf += b; aw.ga += a;
-      if (a > b) { h.w++; aw.l++; h.pts += 3; }
-      else if (a < b) { aw.w++; h.l++; aw.pts += 3; }
-      else { h.d++; aw.d++; h.pts++; aw.pts++; }
+      if (a > b) { 
+        h.w++; aw.l++; h.pts += 3; h.form.push('W'); aw.form.push('L');
+      } else if (a < b) { 
+        aw.w++; h.l++; aw.pts += 3; aw.form.push('W'); h.form.push('L');
+      } else { 
+        h.d++; aw.d++; h.pts++; aw.pts++; h.form.push('D'); aw.form.push('D');
+      }
     }
   });
-  st.forEach(x => x.gd = x.gf - x.ga);
+  
+  st.forEach(x => { x.gd = x.gf - x.ga; x.form = x.form.slice(-5); });
   return st.sort((a,b) => b.pts - a.pts || b.gd - a.gd || b.gf - a.gf || a.name.localeCompare(b.name));
 }
 
@@ -530,27 +663,26 @@ function renderTables(){
   for(const g of ["A", "B"]){
     const st = stats(g);
     out += `
-      <div class="section-title">Group ${g} Standings</div>
-      <div class="card">
-        <div class="table-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th style="width:18px">#</th>
-                <th class="team-th">Team</th>
-                <th>Pl</th><th>W</th><th>D</th><th>L</th><th>GF</th><th>GA</th><th>GD</th><th>Pts</th>
-              </tr>
-            </thead>
-            <tbody>`;
+      <div class="section-title">Group ${g} Standings (Click row for team details)</div>
+      <div class="card"><div class="table-wrap"><table>
+        <thead><tr>
+          <th style="width:18px">#</th>
+          <th class="team-th">Team</th>
+          <th>Pl</th><th>W</th><th>D</th><th>L</th><th>GF</th><th>GA</th><th>GD</th><th>Pts</th><th>Form</th>
+        </tr></thead><tbody>`;
     st.forEach((x, i) => {
+      const formHtml = x.form.length > 0 
+        ? `<div class="form-container">` + x.form.map(f => `<span class="f-badge f-${f.toLowerCase()}">${f}</span>`).join('') + `</div>`
+        : `<span style="color:var(--text-sub)">-</span>`;
       out += `
-        <tr>
+        <tr onclick="openTeamDetail('${g}', ${x.teamIdx})">
           <td class="pos"><span class="pos-bar"></span>${i+1}</td>
           <td class="team-cell">${escapeHtml(x.name)}</td>
           <td>${x.pl}</td><td>${x.w}</td><td>${x.d}</td><td>${x.l}</td>
           <td>${x.gf}</td><td>${x.ga}</td>
           <td>${x.gd > 0 ? '+'+x.gd : x.gd}</td>
           <td class="pts">${x.pts}</td>
+          <td>${formHtml}</td>
         </tr>`;
     });
     out += `</tbody></table></div></div>`;
