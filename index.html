@@ -275,7 +275,7 @@
   .team-match-meta { font-size: 9px; color: var(--text-sub); }
   .form-res-badge { padding: 3px 8px; border-radius: 4px; font-weight: 800; font-size: 10px; color: #fff; }
 
-  /* MATCH DETAIL DESIGN (FIXED SCORE DISPLAY) */
+  /* MATCH DETAIL DESIGN */
   .m-teams-flex { display: flex; justify-content: space-around; align-items: center; margin: 12px 0; }
   .m-team { text-align: center; width: 38%; }
   .m-team-name { font-size: 14px; font-weight: bold; margin-top: 5px; }
@@ -291,11 +291,57 @@
     flex-shrink: 0;
   }
 
-  .team-form-grid { display: flex; gap: 10px; justify-content: space-between; }
-  .form-col { width: 49%; display: flex; flex-direction: column; gap: 6px; }
-  .form-col-title { font-size: 11px; font-weight: 700; color: var(--text-color); text-align: center; margin-bottom: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .form-match-item { display: flex; align-items: center; justify-content: space-between; background: var(--card-bg); padding: 6px 8px; border-radius: 6px; font-size: 10px; border: 1px solid var(--border-color); }
-  .form-team-txt { font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 60px; }
+  /* SOFASCORE STYLE MATCH DETAIL FORM GRID */
+  .team-form-grid-sofa {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  .sofa-form-col {
+    width: 49%;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .sofa-col-header {
+    font-size: 12px;
+    font-weight: 800;
+    color: var(--text-color);
+    text-align: center;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--border-color);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .sofa-match-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--card-bg);
+    padding: 6px 6px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+  }
+  .sofa-opp-name {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--text-color);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 38%;
+  }
+  .sofa-badge {
+    padding: 3px 4px;
+    border-radius: 6px;
+    font-weight: 800;
+    font-size: 10px;
+    color: #ffffff;
+    min-width: 36px;
+    text-align: center;
+    flex-shrink: 0;
+  }
 
   /* FOOTER STYLES */
   footer {
@@ -387,7 +433,6 @@
     <div class="card" id="matchesContainer"></div>
   </div>
 
-  <!-- FOOTER WITH ORGANIZER NAME -->
   <footer>
     Organized by : <strong>Sayar Chit</strong>
   </footer>
@@ -492,8 +537,9 @@ function openTeamDetail(group, teamIndex) {
     if (isPlayed) {
       pl++;
       const [hG, aG] = m.score.split(/[-:]/).map(Number);
-      const myG = m.home === teamIndex ? hG : aG;
-      const oppG = m.home === teamIndex ? aG : hG;
+      const isHome = (m.home === teamIndex);
+      const myG = isHome ? hG : aG;
+      const oppG = isHome ? aG : hG;
       gf += myG; ga += oppG;
 
       let res = 'D', bg = 'var(--accent-gold)';
@@ -501,7 +547,7 @@ function openTeamDetail(group, teamIndex) {
       else if (myG < oppG) { l++; res = 'L'; bg = 'var(--accent-red)'; }
       else { d++; pts += 1; }
 
-      const oppIdx = m.home === teamIndex ? m.away : m.home;
+      const oppIdx = isHome ? m.away : m.home;
       playedList.push({ oppName: teams[group][oppIdx], score: m.score, res, bg, date: m.date });
     }
   });
@@ -554,62 +600,46 @@ function openTeamDetail(group, teamIndex) {
   document.getElementById('popupModal').classList.add('active');
 }
 
-// CLICK MATCH IN FIXTURES -> OPEN MATCH DETAIL POPUP
+// OPEN MATCH DETAIL POPUP (SOFASCORE STYLE FORM DISPLAY)
 function openMatchDetail(index) {
   const m = matches[index];
   const hName = teams[m.g][m.home];
   const aName = teams[m.g][m.away];
 
-  const homeMatches = getTeamMatches(m.g, m.home);
-  let homeHtml = `<div class="form-col-title">${escapeHtml(hName)}</div>`;
-  if (homeMatches.length === 0) {
-    homeHtml += `<div style="text-align:center; color:var(--text-sub); font-size:10px;">ပွဲမကစားရသေးပါ</div>`;
-  } else {
-    homeMatches.forEach(hm => {
-      const oppIndex = hm.home === m.home ? hm.away : hm.home;
-      const oppName = teams[hm.g][oppIndex];
-      const [hG, aG] = hm.score.split(/[-:]/).map(Number);
-      const myGoals = hm.home === m.home ? hG : aG;
-      const oppGoals = hm.home === m.home ? aG : hG;
+  // Helper Function for Sofascore-style Match Row: "Team1  [ Score ]  Team2"
+  const renderSofaRows = (teamIdx) => {
+    const teamMatches = getTeamMatches(m.g, teamIdx);
+    if (teamMatches.length === 0) {
+      return `<div style="text-align:center; color:var(--text-sub); font-size:10px; padding:10px 0;">ပွဲမကစားရသေးပါ</div>`;
+    }
+    
+    return teamMatches.map(tm => {
+      const isHome = (tm.home === teamIdx);
+      const myTeamName = teams[tm.g][teamIdx];
+      const oppIndex = isHome ? tm.away : tm.home;
+      const oppName = teams[tm.g][oppIndex];
+      const [hG, aG] = tm.score.split(/[-:]/).map(Number);
+      
+      const myG = isHome ? hG : aG;
+      const oppG = isHome ? aG : hG;
 
-      let badgeBg = 'var(--accent-gold)', resTxt = 'D';
-      if (myGoals > oppGoals) { badgeBg = 'var(--accent-green)'; resTxt = 'W'; }
-      else if (myGoals < oppGoals) { badgeBg = 'var(--accent-red)'; resTxt = 'L'; }
+      let badgeBg = 'var(--accent-gold)'; // Draw
+      if (myG > oppG) badgeBg = 'var(--accent-green)'; // Win
+      else if (myG < oppG) badgeBg = 'var(--accent-red)'; // Lose
 
-      homeHtml += `
-        <div class="form-match-item">
-          <span class="form-team-txt">${escapeHtml(oppName)}</span>
-          <span class="form-res-badge" style="background:${badgeBg}">${hm.score} (${resTxt})</span>
+      // Sofascore Format: [ MyTeam ] [ myG - oppG ] [ OpponentTeam ]
+      return `
+        <div class="sofa-match-row">
+          <span class="sofa-opp-name" style="text-align:right;">${escapeHtml(myTeamName)}</span>
+          <span class="sofa-badge" style="background:${badgeBg}">${myG} - ${oppG}</span>
+          <span class="sofa-opp-name" style="text-align:left;">${escapeHtml(oppName)}</span>
         </div>`;
-    });
-  }
-
-  const awayMatches = getTeamMatches(m.g, m.away);
-  let awayHtml = `<div class="form-col-title">${escapeHtml(aName)}</div>`;
-  if (awayMatches.length === 0) {
-    awayHtml += `<div style="text-align:center; color:var(--text-sub); font-size:10px;">ပွဲမကစားရသေးပါ</div>`;
-  } else {
-    awayMatches.forEach(am => {
-      const oppIndex = am.home === m.away ? am.away : am.home;
-      const oppName = teams[am.g][oppIndex];
-      const [hG, aG] = am.score.split(/[-:]/).map(Number);
-      const myGoals = am.home === m.away ? aG : hG;
-      const oppGoals = am.home === m.away ? hG : aG;
-
-      let badgeBg = 'var(--accent-gold)', resTxt = 'D';
-      if (myGoals > oppGoals) { badgeBg = 'var(--accent-green)'; resTxt = 'W'; }
-      else if (myGoals < oppGoals) { badgeBg = 'var(--accent-red)'; resTxt = 'L'; }
-
-      awayHtml += `
-        <div class="form-match-item">
-          <span class="form-team-txt">${escapeHtml(oppName)}</span>
-          <span class="form-res-badge" style="background:${badgeBg}">${am.score} (${resTxt})</span>
-        </div>`;
-    });
-  }
+    }).join('');
+  };
 
   const modalHtml = `
     <button class="close-btn" onclick="hideModal()">✕</button>
+    
     <div class="m-header">
       <span class="header-badge">GROUP ${m.g}</span>
       <div class="m-teams-flex">
@@ -625,11 +655,23 @@ function openMatchDetail(index) {
       <div class="m-row"><span>Venue</span><strong>Phyu Township Sports Ground</strong></div>
     </div>
 
+    <!-- SOFASCORE STYLE TEAM FORM -->
     <div class="m-sub-card">
-      <div class="m-sub-title">Team Form (Recent Matches)</div>
-      <div class="team-form-grid">
-        <div class="form-col">${homeHtml}</div>
-        <div class="form-col">${awayHtml}</div>
+      <div class="m-sub-title">Team Form</div>
+      <div class="team-form-grid-sofa">
+        
+        <!-- Left Team Form -->
+        <div class="sofa-form-col">
+          <div class="sofa-col-header">${escapeHtml(hName)}</div>
+          ${renderSofaRows(m.home)}
+        </div>
+
+        <!-- Right Team Form -->
+        <div class="sofa-form-col">
+          <div class="sofa-col-header">${escapeHtml(aName)}</div>
+          ${renderSofaRows(m.away)}
+        </div>
+
       </div>
     </div>
   `;
