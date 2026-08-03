@@ -275,11 +275,22 @@
   .team-match-meta { font-size: 9px; color: var(--text-sub); }
   .form-res-badge { padding: 3px 8px; border-radius: 4px; font-weight: 800; font-size: 10px; color: #fff; }
 
-  /* MATCH DETAIL DESIGN */
+  /* MATCH DETAIL DESIGN (FIXED SCORE DISPLAY) */
   .m-teams-flex { display: flex; justify-content: space-around; align-items: center; margin: 12px 0; }
-  .m-team { text-align: center; width: 40%; }
+  .m-team { text-align: center; width: 38%; }
   .m-team-name { font-size: 14px; font-weight: bold; margin-top: 5px; }
-  .m-score { font-size: 24px; font-weight: 800; color: var(--accent-green); background: var(--card-inner); padding: 4px 12px; border-radius: 8px; border: 1px solid var(--border-color); }
+  .m-score { 
+    font-size: 18px; 
+    font-weight: 800; 
+    color: var(--accent-green); 
+    background: var(--card-inner); 
+    padding: 6px 12px; 
+    border-radius: 8px; 
+    border: 1px solid var(--border-color); 
+    white-space: nowrap; 
+    flex-shrink: 0;
+  }
+
   .team-form-grid { display: flex; gap: 10px; justify-content: space-between; }
   .form-col { width: 49%; display: flex; flex-direction: column; gap: 6px; }
   .form-col-title { font-size: 11px; font-weight: 700; color: var(--text-color); text-align: center; margin-bottom: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
