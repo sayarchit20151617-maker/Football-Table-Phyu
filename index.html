@@ -291,54 +291,59 @@
     flex-shrink: 0;
   }
 
-  /* SOFASCORE STYLE MATCH DETAIL FORM GRID */
-  .team-form-grid-sofa {
-    display: flex;
-    justify-content: space-between;
-    gap: 10px;
-  }
-  .sofa-form-col {
-    width: 49%;
+  /* VERTICAL LIST STYLE TEAM FORM FOR LONG NAMES */
+  .team-form-container-sofa {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 16px;
   }
-  .sofa-col-header {
+  .sofa-form-section {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 10px;
+  }
+  .sofa-sec-title {
     font-size: 12px;
     font-weight: 800;
-    color: var(--text-color);
-    text-align: center;
-    padding-bottom: 6px;
+    color: var(--accent-green);
+    margin-bottom: 8px;
+    padding-bottom: 4px;
     border-bottom: 1px solid var(--border-color);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
   }
-  .sofa-match-row {
+  .sofa-match-row-full {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: var(--card-bg);
-    padding: 6px 6px;
-    border-radius: 8px;
-    border: 1px solid var(--border-color);
+    padding: 6px 4px;
+    border-bottom: 1px dashed var(--border-color);
+    gap: 6px;
   }
-  .sofa-opp-name {
-    font-size: 10px;
+  .sofa-match-row-full:last-child { border-bottom: none; }
+
+  .sofa-team-left {
+    font-size: 11px;
     font-weight: 700;
     color: var(--text-color);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    width: 38%;
+    width: 42%;
+    text-align: right;
+    word-break: break-word;
   }
-  .sofa-badge {
-    padding: 3px 4px;
+  .sofa-team-right {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--text-color);
+    width: 42%;
+    text-align: left;
+    word-break: break-word;
+  }
+  .sofa-score-badge {
+    padding: 3px 6px;
     border-radius: 6px;
     font-weight: 800;
     font-size: 10px;
     color: #ffffff;
-    min-width: 36px;
+    min-width: 42px;
     text-align: center;
     flex-shrink: 0;
   }
@@ -600,17 +605,17 @@ function openTeamDetail(group, teamIndex) {
   document.getElementById('popupModal').classList.add('active');
 }
 
-// OPEN MATCH DETAIL POPUP (SOFASCORE STYLE FORM DISPLAY)
+// OPEN MATCH DETAIL POPUP (FULL TEAM NAME VERTICAL FORM UI)
 function openMatchDetail(index) {
   const m = matches[index];
   const hName = teams[m.g][m.home];
   const aName = teams[m.g][m.away];
 
-  // Helper Function for Sofascore-style Match Row: "Team1  [ Score ]  Team2"
-  const renderSofaRows = (teamIdx) => {
+  // Helper Function for Vertical Full-Name Match Rows
+  const renderSofaRowsFull = (teamIdx) => {
     const teamMatches = getTeamMatches(m.g, teamIdx);
     if (teamMatches.length === 0) {
-      return `<div style="text-align:center; color:var(--text-sub); font-size:10px; padding:10px 0;">ပွဲမကစားရသေးပါ</div>`;
+      return `<div style="text-align:center; color:var(--text-sub); font-size:10px; padding:8px 0;">ပွဲမကစားရသေးပါ</div>`;
     }
     
     return teamMatches.map(tm => {
@@ -627,12 +632,11 @@ function openMatchDetail(index) {
       if (myG > oppG) badgeBg = 'var(--accent-green)'; // Win
       else if (myG < oppG) badgeBg = 'var(--accent-red)'; // Lose
 
-      // Sofascore Format: [ MyTeam ] [ myG - oppG ] [ OpponentTeam ]
       return `
-        <div class="sofa-match-row">
-          <span class="sofa-opp-name" style="text-align:right;">${escapeHtml(myTeamName)}</span>
-          <span class="sofa-badge" style="background:${badgeBg}">${myG} - ${oppG}</span>
-          <span class="sofa-opp-name" style="text-align:left;">${escapeHtml(oppName)}</span>
+        <div class="sofa-match-row-full">
+          <span class="sofa-team-left">${escapeHtml(myTeamName)}</span>
+          <span class="sofa-score-badge" style="background:${badgeBg}">${myG} - ${oppG}</span>
+          <span class="sofa-team-right">${escapeHtml(oppName)}</span>
         </div>`;
     }).join('');
   };
@@ -655,21 +659,21 @@ function openMatchDetail(index) {
       <div class="m-row"><span>Venue</span><strong>Phyu Township Sports Ground</strong></div>
     </div>
 
-    <!-- SOFASCORE STYLE TEAM FORM -->
+    <!-- FULL NAME VERTICAL TEAM FORM -->
     <div class="m-sub-card">
-      <div class="m-sub-title">Team Form</div>
-      <div class="team-form-grid-sofa">
+      <div class="m-sub-title">Team Form (Recent Matches)</div>
+      <div class="team-form-container-sofa">
         
-        <!-- Left Team Form -->
-        <div class="sofa-form-col">
-          <div class="sofa-col-header">${escapeHtml(hName)}</div>
-          ${renderSofaRows(m.home)}
+        <!-- Home Team Form Section -->
+        <div class="sofa-form-section">
+          <div class="sofa-sec-title">⚽ ${escapeHtml(hName)}</div>
+          ${renderSofaRowsFull(m.home)}
         </div>
 
-        <!-- Right Team Form -->
-        <div class="sofa-form-col">
-          <div class="sofa-col-header">${escapeHtml(aName)}</div>
-          ${renderSofaRows(m.away)}
+        <!-- Away Team Form Section -->
+        <div class="sofa-form-section">
+          <div class="sofa-sec-title">⚽ ${escapeHtml(aName)}</div>
+          ${renderSofaRowsFull(m.away)}
         </div>
 
       </div>
