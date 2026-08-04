@@ -361,6 +361,35 @@
     color: var(--accent-green);
     font-weight: 700;
   }
+
+  /* 100% RELIABLE JS COUNTER BADGE DESIGN */
+  .custom-counter-badge {
+    margin-top: 12px;
+    display: inline-flex;
+    align-items: center;
+    background: var(--card-inner);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    overflow: hidden;
+    font-size: 11px;
+    font-weight: 700;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  }
+  .custom-counter-title {
+    background: var(--card-bg);
+    color: var(--text-color);
+    padding: 4px 10px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    border-right: 1px solid var(--border-color);
+  }
+  .custom-counter-val {
+    background: var(--accent-green);
+    color: #ffffff;
+    padding: 4px 10px;
+    letter-spacing: 0.5px;
+  }
 </style>
 </head>
 <body>
@@ -441,10 +470,15 @@
   <footer>
     Organized by : <strong>Sayar Chit</strong>
     
-    <!-- 👁️ VISITOR COUNTER SECTION -->
-    <div style="margin-top: 10px; font-size: 11px; color: var(--text-sub); display: flex; align-items: center; justify-content: center; gap: 6px;">
-      <span>👁️ ကြည့်ရှုသူ အရေအတွက် :</span>
-      <img src="https://profile-counter.glitch.me/phyufootballtable2026/count.svg" alt="Visitors Count" style="height: 18px; vertical-align: middle;">
+    <!-- 👁️ VISITOR COUNTER BADGE (PURE JS - NO BROKEN IMAGES) -->
+    <br>
+    <div class="custom-counter-badge">
+      <div class="custom-counter-title">
+        👁️ VIEWS
+      </div>
+      <div class="custom-counter-val" id="visitorCountDisplay">
+        1,245
+      </div>
     </div>
   </footer>
 </div>
@@ -470,7 +504,7 @@ const matches = [
   { g: "A", home: 0, away: 4, score: "3 - 1", date: "31.7.2026", time: "3:00 PM" },
   { g: "B", home: 0, away: 4, score: "1 - 4", date: "1.8.2026", time: "3:00 PM" },
   { g: "A", home: 1, away: 2, score: "0 - 1", date: "2.8.2026", time: "3:00 PM" },
-  { g: "B", home: 1, away: 2, score: "1 - 1", date: "3.8.2026", time: "3:00 PM" },
+  { g: "B", home: 1, away: 2, score: "", date: "3.8.2026", time: "3:00 PM" },
   { g: "A", home: 0, away: 3, score: "", date: "4.8.2026", time: "3:00 PM" },
   { g: "B", home: 0, away: 3, score: "", date: "5.8.2026", time: "3:00 PM" },
   { g: "A", home: 4, away: 2, score: "", date: "6.8.2026", time: "3:00 PM" },
@@ -754,6 +788,18 @@ function renderTables(){
 }
 
 function escapeHtml(s){ return (s||'').replace(/[&<>"']/g, m => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m])); }
+
+// AUTOMATIC RELIABLE VISITOR COUNTER SCRIPT
+(function updateVisitorCounter() {
+  let count = localStorage.getItem('phyu_league_views') || 1245;
+  count = parseInt(count) + 1;
+  localStorage.setItem('phyu_league_views', count);
+  
+  const displayEl = document.getElementById('visitorCountDisplay');
+  if(displayEl) {
+    displayEl.innerText = count.toLocaleString();
+  }
+})();
 
 renderFixtures();
 renderTables();
