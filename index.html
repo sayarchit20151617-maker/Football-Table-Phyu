@@ -82,6 +82,48 @@
     color: var(--text-color);
   }
 
+  /* FULLY UPDATED RUNNING ANNOUNCEMENT BAR */
+  .running-text-wrapper {
+    background: #0f1c2e;
+    border-top: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+    overflow: hidden;
+    white-space: nowrap;
+    padding: 9px 0;
+    font-size: 13px;
+  }
+
+  .running-text-content {
+    display: inline-block;
+    padding-left: 100%;
+    animation: marquee 25s linear infinite;
+    color: #e2e8f0;
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .running-text-content b {
+    color: var(--accent-gold);
+  }
+
+  .running-text-content u {
+    color: var(--accent-green);
+    font-weight: 700;
+  }
+
+  .running-text-content:hover {
+    color: #ffffff;
+  }
+
+  @keyframes marquee {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(-100%, 0); }
+  }
+
+  .running-text-wrapper:hover .running-text-content {
+    animation-play-state: paused;
+  }
+
   .nav-tabs-wrap {
     display: flex;
     align-items: center;
@@ -136,7 +178,7 @@
   .section-title{font-size:13px;font-weight:700;color:var(--text-sub);margin:14px 4px 8px; text-transform: uppercase; letter-spacing: 0.5px;}
   .card{background:var(--card-bg);border-radius:12px;padding:6px 2px;margin-bottom:16px;border:1px solid var(--border-color); box-shadow: 0 4px 12px rgba(0,0,0,0.08);}
   
-  /* Clickable Match Row */
+  /* Match Row */
   .match-row{
     display:flex;
     align-items:center;
@@ -146,9 +188,7 @@
     cursor: pointer;
     border-radius: 8px;
   }
-  .match-row:hover {
-    background: var(--card-inner);
-  }
+  .match-row:hover { background: var(--card-inner); }
   .match-row:last-child{border-bottom:none}
   .match-meta{font-size:10px;color:var(--text-sub);width:80px;line-height:1.4;flex-shrink:0}
   .match-teams-wrap{flex:1;display:flex;align-items:center;justify-content:space-between;padding:0 2px}
@@ -157,7 +197,7 @@
   .t-away{text-align:left}
   .score-badge{background:var(--card-inner);color:var(--accent-green);font-weight:700;font-size:12px;padding:5px 8px;border-radius:6px;min-width:44px;text-align:center;border:1px solid var(--border-color);flex-shrink:0}
   
-  /* Standings Table */
+  /* Table */
   .table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
   table{width:100%;border-collapse:collapse;font-size:12px}
   th{color:var(--text-sub);font-weight:600;padding:8px 4px;font-size:11px;text-align:center;border-bottom:1px solid var(--border-color);white-space:nowrap}
@@ -165,7 +205,6 @@
   th.team-th{text-align:left;width:100%}
   td.team-cell{text-align:left;font-weight:700;font-size:13px;color:var(--text-color);display:flex;align-items:center;gap:3px;white-space:nowrap}
   
-  /* Clickable Table Row */
   tbody tr { cursor: pointer; }
   tbody tr:hover { background: var(--card-inner); }
 
@@ -197,7 +236,7 @@
   .trophy-icon { font-size: 24px; margin-left: 4px; }
   .third-place-wrapper { margin-top: 10px; border-top: 1px dashed var(--border-color); padding-top: 16px; }
 
-  /* --- POPUP MODAL DESIGN --- */
+  /* Modal */
   .modal-overlay {
     position: fixed;
     top: 0; left: 0; width: 100%; height: 100%;
@@ -253,13 +292,11 @@
   .m-row { display: flex; justify-content: space-between; padding: 5px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
   .m-row:last-child { border: none; }
 
-  /* TEAM STATS GRID */
   .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; text-align: center; margin-bottom: 12px; }
   .stat-box { background: var(--card-inner); padding: 8px 4px; border-radius: 8px; border: 1px solid var(--border-color); }
   .stat-val { font-size: 14px; font-weight: 800; color: var(--accent-green); }
   .stat-lbl { font-size: 9px; color: var(--text-sub); margin-top: 2px; }
 
-  /* TEAM MATCH LIST */
   .team-match-item {
     display: flex;
     align-items: center;
@@ -275,7 +312,6 @@
   .team-match-meta { font-size: 9px; color: var(--text-sub); }
   .form-res-badge { padding: 3px 8px; border-radius: 4px; font-weight: 800; font-size: 10px; color: #fff; }
 
-  /* MATCH DETAIL DESIGN */
   .m-teams-flex { display: flex; justify-content: space-around; align-items: center; margin: 12px 0; }
   .m-team { text-align: center; width: 38%; }
   .m-team-name { font-size: 14px; font-weight: bold; margin-top: 5px; }
@@ -291,64 +327,16 @@
     flex-shrink: 0;
   }
 
-  /* VERTICAL LIST STYLE TEAM FORM FOR LONG NAMES */
-  .team-form-container-sofa {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-  }
-  .sofa-form-section {
-    background: var(--card-bg);
-    border: 1px solid var(--border-color);
-    border-radius: 10px;
-    padding: 10px;
-  }
-  .sofa-sec-title {
-    font-size: 12px;
-    font-weight: 800;
-    color: var(--accent-green);
-    margin-bottom: 8px;
-    padding-bottom: 4px;
-    border-bottom: 1px solid var(--border-color);
-  }
-  .sofa-match-row-full {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 6px 4px;
-    border-bottom: 1px dashed var(--border-color);
-    gap: 6px;
-  }
+  .team-form-container-sofa { display: flex; flex-direction: column; gap: 16px; }
+  .sofa-form-section { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 10px; padding: 10px; }
+  .sofa-sec-title { font-size: 12px; font-weight: 800; color: var(--accent-green); margin-bottom: 8px; padding-bottom: 4px; border-bottom: 1px solid var(--border-color); }
+  .sofa-match-row-full { display: flex; align-items: center; justify-content: space-between; padding: 6px 4px; border-bottom: 1px dashed var(--border-color); gap: 6px; }
   .sofa-match-row-full:last-child { border-bottom: none; }
 
-  .sofa-team-left {
-    font-size: 11px;
-    font-weight: 700;
-    color: var(--text-color);
-    width: 42%;
-    text-align: right;
-    word-break: break-word;
-  }
-  .sofa-team-right {
-    font-size: 11px;
-    font-weight: 700;
-    color: var(--text-color);
-    width: 42%;
-    text-align: left;
-    word-break: break-word;
-  }
-  .sofa-score-badge {
-    padding: 3px 6px;
-    border-radius: 6px;
-    font-weight: 800;
-    font-size: 10px;
-    color: #ffffff;
-    min-width: 42px;
-    text-align: center;
-    flex-shrink: 0;
-  }
+  .sofa-team-left { font-size: 11px; font-weight: 700; color: var(--text-color); width: 42%; text-align: right; word-break: break-word; }
+  .sofa-team-right { font-size: 11px; font-weight: 700; color: var(--text-color); width: 42%; text-align: left; word-break: break-word; }
+  .sofa-score-badge { padding: 3px 6px; border-radius: 6px; font-weight: 800; font-size: 10px; color: #ffffff; min-width: 42px; text-align: center; flex-shrink: 0; }
 
-  /* FOOTER STYLES */
   footer {
     text-align: center;
     padding: 20px 10px 10px;
@@ -362,7 +350,6 @@
     font-weight: 700;
   }
 
-  /* 100% RELIABLE JS COUNTER BADGE DESIGN */
   .custom-counter-badge {
     margin-top: 12px;
     display: inline-flex;
@@ -398,6 +385,13 @@
   <span class="header-badge">TOURNAMENT 2026</span>
   <h1>၂၀၂၆ ခုနှစ်၊ ဖြူးမြို့နယ်စီမံခန့်ခွဲရေးနှင့် အုပ်ချုပ်ရေးကော်မတီ<br>ဥက္ကဋ္ဌ ဖလား ရပ်ကွက် နှင့် ကျေးရွာအုပ်စု အလွတ်တန်း ဘောလုံးပြိုင်ပွဲ</h1>
 </header>
+
+<!-- DETAILED & FULL ANNOUNCEMENT BAR -->
+<div class="running-text-wrapper">
+  <a href="https://t.me/REN2003_7April" target="_blank" class="running-text-content">
+    📢 <b>Website & Software ရေးဆွဲလိုပါသလား?</b> ဘောလုံးပွဲစဉ်ဇယားများ၊ Hotel Management System၊ POS စတိုးဆိုင်သုံး ဆော့ဖ်ဝဲလ်၊ Mobile App၊ School / Clinic Management နှင့် အခြား Custom Website & Software များကို စိတ်တိုင်းကျ သက်သာသော ဈေးနှုန်းဖြင့် ရေးဆွဲပေးပါသည်။ အသေးစိတ် စုံစမ်းရန် <u>ဒီနေရာကို နှိပ်၍ Telegram တွင် တိုက်ရိုက် ဆက်သွယ်နိုင်ပါသည်</u>။
+  </a>
+</div>
 
 <div class="nav-tabs-wrap">
   <div class="nav-tabs">
@@ -463,14 +457,13 @@
   </div>
 
   <div id="fixtures-tab" class="tab-content">
-    <div class="section-title">Matches & Results (Click for details)</div>
+    <div class="section-title">Matches & Results</div>
     <div class="card" id="matchesContainer"></div>
   </div>
 
   <footer>
     Organized by : <strong>Sayar Chit</strong>
     
-    <!-- 👁️ VISITOR COUNTER BADGE (PURE JS - NO BROKEN IMAGES) -->
     <br>
     <div class="custom-counter-badge">
       <div class="custom-counter-title">
@@ -483,11 +476,8 @@
   </footer>
 </div>
 
-<!-- GENERAL POPUP MODAL -->
 <div class="modal-overlay" id="popupModal" onclick="closeModal(event)">
-  <div class="modal-card" id="modalBody">
-    <!-- Dynamic Content Loaded Here -->
-  </div>
+  <div class="modal-card" id="modalBody"></div>
 </div>
 
 <script>
@@ -559,7 +549,6 @@ function renderFixtures(){
   }).join("");
 }
 
-// Get All Played Matches for a Team
 function getTeamMatches(group, teamIndex) {
   return matches.filter(m => 
     m.g === group && 
@@ -568,12 +557,10 @@ function getTeamMatches(group, teamIndex) {
   );
 }
 
-// CLICK TEAM IN TABLE -> OPEN TEAM DETAIL POPUP
 function openTeamDetail(group, teamIndex) {
   const teamName = teams[group][teamIndex];
   const allTeamMatches = matches.filter(m => m.g === group && (m.home === teamIndex || m.away === teamIndex));
   
-  // Calculate Stats
   let pl = 0, w = 0, d = 0, l = 0, gf = 0, ga = 0, pts = 0;
   const playedList = [];
 
@@ -620,7 +607,6 @@ function openTeamDetail(group, teamIndex) {
       <div class="m-title-text">${escapeHtml(teamName)}</div>
     </div>
 
-    <!-- Quick Stats -->
     <div class="stats-grid">
       <div class="stat-box"><div class="stat-val">${pts}</div><div class="stat-lbl">POINTS</div></div>
       <div class="stat-box"><div class="stat-val">${pl}</div><div class="stat-lbl">PLAYED</div></div>
@@ -634,7 +620,6 @@ function openTeamDetail(group, teamIndex) {
       <div class="m-row"><span>Goals Conceded (GA)</span><strong>${ga}</strong></div>
     </div>
 
-    <!-- Match Results List -->
     <div class="m-sub-card">
       <div class="m-sub-title">Played Matches</div>
       ${matchesHtml}
@@ -645,13 +630,11 @@ function openTeamDetail(group, teamIndex) {
   document.getElementById('popupModal').classList.add('active');
 }
 
-// OPEN MATCH DETAIL POPUP (FULL TEAM NAME VERTICAL FORM UI)
 function openMatchDetail(index) {
   const m = matches[index];
   const hName = teams[m.g][m.home];
   const aName = teams[m.g][m.away];
 
-  // Helper Function for Vertical Full-Name Match Rows
   const renderSofaRowsFull = (teamIdx) => {
     const teamMatches = getTeamMatches(m.g, teamIdx);
     if (teamMatches.length === 0) {
@@ -668,9 +651,9 @@ function openMatchDetail(index) {
       const myG = isHome ? hG : aG;
       const oppG = isHome ? aG : hG;
 
-      let badgeBg = 'var(--accent-gold)'; // Draw
-      if (myG > oppG) badgeBg = 'var(--accent-green)'; // Win
-      else if (myG < oppG) badgeBg = 'var(--accent-red)'; // Lose
+      let badgeBg = 'var(--accent-gold)';
+      if (myG > oppG) badgeBg = 'var(--accent-green)';
+      else if (myG < oppG) badgeBg = 'var(--accent-red)';
 
       return `
         <div class="sofa-match-row-full">
@@ -699,23 +682,17 @@ function openMatchDetail(index) {
       <div class="m-row"><span>Venue</span><strong>Phyu Township Sports Ground</strong></div>
     </div>
 
-    <!-- FULL NAME VERTICAL TEAM FORM -->
     <div class="m-sub-card">
       <div class="m-sub-title">Team Form (Recent Matches)</div>
       <div class="team-form-container-sofa">
-        
-        <!-- Home Team Form Section -->
         <div class="sofa-form-section">
           <div class="sofa-sec-title">⚽ ${escapeHtml(hName)}</div>
           ${renderSofaRowsFull(m.home)}
         </div>
-
-        <!-- Away Team Form Section -->
         <div class="sofa-form-section">
           <div class="sofa-sec-title">⚽ ${escapeHtml(aName)}</div>
           ${renderSofaRowsFull(m.away)}
         </div>
-
       </div>
     </div>
   `;
@@ -760,7 +737,7 @@ function renderTables(){
   for(const g of ["A", "B"]){
     const st = stats(g);
     out += `
-      <div class="section-title">Group ${g} Standings (Click row for team details)</div>
+      <div class="section-title">Group ${g} Standings</div>
       <div class="card"><div class="table-wrap"><table>
         <thead><tr>
           <th style="width:18px">#</th>
@@ -789,7 +766,6 @@ function renderTables(){
 
 function escapeHtml(s){ return (s||'').replace(/[&<>"']/g, m => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m])); }
 
-// AUTOMATIC RELIABLE VISITOR COUNTER SCRIPT
 (function updateVisitorCounter() {
   let count = localStorage.getItem('phyu_league_views') || 1245;
   count = parseInt(count) + 1;
